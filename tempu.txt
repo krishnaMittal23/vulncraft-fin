@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=True
+      - GITHUB_TOKEN=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
+      - GITHUB_WEBHOOK_SECRET=vulncraft_webhook_secret_2024_secure_key
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    network_mode: bridge
