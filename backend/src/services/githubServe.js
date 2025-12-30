@@ -1,11 +1,7 @@
 const axios = require("axios");
 const User = require("../models/User");
 
-/**
- * Fetch GitHub repositories of an authenticated user
- * @param {string} userId - MongoDB user ID
- * @returns {Promise<Array>} - List of repositories
- */
+
 const getUserRepos = async (userId) => {
   const user = await User.findById(userId);
 
@@ -19,7 +15,7 @@ const getUserRepos = async (userId) => {
       Accept: "application/vnd.github.v3+json",
     },
     params: {
-      visibility: "all", // ✅ Fetch both public & private repositories
+      visibility: "all", // Fetch both public & private repositories
       per_page: 100,
     },
   });
@@ -27,14 +23,7 @@ const getUserRepos = async (userId) => {
   return response.data;
 };
 
-/**
- * Recursively fetch all files from a GitHub repository
- * @param {string} owner - Repository owner (GitHub username)
- * @param {string} repo - Repository name
- * @param {string} path - Path in the repo (default: root)
- * @param {string} accessToken - User's GitHub OAuth token
- * @returns {Promise<Array>} - List of files with content
- */
+
 const fetchRepoContents = async (owner, repo, path = "", accessToken) => {
   try {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
@@ -87,16 +76,7 @@ const fetchRepoContents = async (owner, repo, path = "", accessToken) => {
   }
 };
 
-/**
- * Create a GitHub issue in a repository
- * @param {string} owner - Repository owner (GitHub username)
- * @param {string} repo - Repository name
- * @param {string} title - Issue title
- * @param {string} body - Issue description (markdown supported)
- * @param {Array<string>} labels - Optional labels (e.g., ["bug", "security"])
- * @param {string} accessToken - User's GitHub OAuth token
- * @returns {Promise<Object>} - Created issue data
- */
+
 const createGitHubIssue = async (owner, repo, title, body, labels = [], accessToken) => {
   try {
     const url = `https://api.github.com/repos/${owner}/${repo}/issues`;
