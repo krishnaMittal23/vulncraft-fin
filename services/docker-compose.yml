@@ -1,0 +1,42 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=True
+      - OWASP_ZAP_URL=http://owasp-zap:8080
+      - GITHUB_TOKEN=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
+      - GITHUB_WEBHOOK_SECRET=vulncraft_webhook_secret_2024_secure_key
+      - GITHUB_APP_ID=2256872
+      - GITHUB_CLIENT_ID=Iv23liRsHowmsLdC0wM2
+      - GITHUB_CLIENT_SECRET=220f785960577bf6463e8abf612d4f8d11dc898f
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    depends_on:
+      - owasp-zap
+    networks:
+      - vulncraft-network
+
+  owasp-zap:
+    image: zaproxy/zap-stable:latest
+    container_name: vulncraft-owasp-zap
+    ports:
+      - "8080:8080"
+    command: ["zap.sh", "-daemon", "-host", "0.0.0.0", "-port", "8080", "-config", "api.disablekey=true", "-config", "api.addrs.addr.name=.*", "-config", "api.addrs.addr.regex=true"]
+    environment:
+      - ZAP_PROXY=8080
+    volumes:
+      - zap-data:/zap/wrk
+    networks:
+      - vulncraft-network
+
+networks:
+  vulncraft-network:
+    driver: bridge
+
+volumes:
+  zap-data:

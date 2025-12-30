@@ -1,0 +1,13 @@
+Django
+django-cors-headers
+python-nmap
+psycopg
+psycopg2-binary
+requests
+python-owasp-zap-v2.4
+cyclonedx-bom
+safety
+bandit
+PyGithub
+PyJWT
+PyJWT

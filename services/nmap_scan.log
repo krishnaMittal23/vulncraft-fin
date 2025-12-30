@@ -1,0 +1,1614 @@
+2025-11-07 22:09:47,995 - INFO - /app/Gobuster/views.py changed, reloading.
+2025-11-07 22:09:57,343 - INFO - /app/Gobuster/urls.py changed, reloading.
+2025-11-08 00:02:46,822 - INFO - /app/Gobuster/views.py changed, reloading.
+2025-11-08 00:02:49,621 - INFO - /app/Gobuster/views.py changed, reloading.
+2025-11-08 00:04:20,601 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:04:20,609 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:05:06,341 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 00:05:06,344 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 00:05:06,348 - INFO - Found 9 matches in Gobuster output
+2025-11-08 00:05:06,348 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 00:05:06,348 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 00:05:06,349 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 00:05:06,349 - INFO - Parsed: /infos.php -> Status 200
+2025-11-08 00:05:06,350 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 00:05:06,350 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 00:05:06,351 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 00:05:06,359 - INFO - Running SQLMap scan
+2025-11-08 00:05:06,361 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:05:06,601 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-08 00:05:06,603 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-08 00:05:06,604 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-08 00:07:02,210 - INFO - 📊 SQLMap exit code: 0
+2025-11-08 00:07:02,211 - INFO - 📊 STDOUT length: 6318 chars
+2025-11-08 00:07:02,212 - INFO - 📊 STDERR length: 0 chars
+2025-11-08 00:07:02,213 - INFO - 🚨 SQLMap detected: SQL Injection Vulnerability (indicator: 'is vulnerable')
+2025-11-08 00:07:02,216 - INFO - 🎯 Injection point identified: sqlmap identified the following injection point(s) with a total of 54 HTTP(s) requests:
+2025-11-08 00:07:02,217 - INFO - 🔍 Found parameter: Parameter: cat (GET)
+2025-11-08 00:07:02,218 - INFO - 🔍 Vulnerability title: Title: AND boolean-based blind - WHERE or HAVING clause
+2025-11-08 00:07:02,218 - INFO - 🔍 Payload found: Payload: cat=1 AND 1512=1512...
+2025-11-08 00:07:02,219 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)
+2025-11-08 00:07:02,219 - INFO - 🔍 Payload found: Payload: cat=1 AND GTID_SUBSET(CONCAT(0x7171767071,(SELECT (ELT(9252=9252,1))),0...
+2025-11-08 00:07:02,219 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.0.12 OR time-based blind (SLEEP - comment)
+2025-11-08 00:07:02,220 - INFO - 🔍 Payload found: Payload: cat=1 OR SLEEP(5)#...
+2025-11-08 00:07:02,220 - INFO - 🔍 Vulnerability title: Title: Generic UNION query (NULL) - 11 columns
+2025-11-08 00:07:02,221 - INFO - 🔍 Payload found: Payload: cat=1 UNION ALL SELECT NULL,CONCAT(0x7171767071,0x475573697a786f5771657...
+2025-11-08 00:07:02,221 - INFO - 💾 back-end DBMS: MySQL >= 5.6
+2025-11-08 00:07:02,221 - INFO - ✅ SQLMap scan completed - VULNERABLE! Found 14 details
+2025-11-08 00:07:02,222 - INFO - SQLMap found 1 vulnerable parameters
+2025-11-08 00:07:02,222 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2025-11-08 00:16:30,456 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:16:30,459 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:17:14,565 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 00:17:14,569 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 00:17:14,570 - INFO - Found 9 matches in Gobuster output
+2025-11-08 00:17:14,570 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 00:17:14,571 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 00:17:14,571 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 00:17:14,572 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 00:17:14,572 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 00:17:14,572 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 00:17:14,573 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 00:17:14,573 - INFO - Running Nmap scan
+2025-11-08 00:17:46,879 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-08 00:17:46,880 - INFO - Nmap open_ports count: 1
+2025-11-08 00:17:46,881 - INFO - Added 1 Nmap ports. Total: 10
+2025-11-08 00:17:46,881 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2025-11-08 00:18:03,637 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:18:03,638 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:18:52,591 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 00:18:52,593 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 00:18:52,593 - INFO - Found 9 matches in Gobuster output
+2025-11-08 00:18:52,594 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 00:18:52,594 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 00:18:52,595 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 00:18:52,596 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 00:18:52,597 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 00:18:52,598 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 00:18:52,599 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 00:18:52,599 - INFO - Vulnerability scan completed successfully. Total findings: 9
+2025-11-08 00:19:21,165 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:19:21,178 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:20:04,356 - INFO - Parsing Gobuster results, length: 431
+2025-11-08 00:20:04,365 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 170]
+
+2025-11-08 00:20:04,367 - INFO - Found 9 matches in Gobuster output
+2025-11-08 00:20:04,368 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 00:20:04,369 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 00:20:04,372 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 00:20:04,391 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 00:20:04,392 - INFO - Parsed: /infos.php -> Status 200
+2025-11-08 00:20:04,393 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 00:20:04,393 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 00:20:04,393 - INFO - Running SQLMap scan
+2025-11-08 00:20:04,394 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:20:04,632 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-08 00:20:04,633 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-08 00:20:04,633 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-08 00:22:02,661 - INFO - 📊 SQLMap exit code: 0
+2025-11-08 00:22:02,661 - INFO - 📊 STDOUT length: 6822 chars
+2025-11-08 00:22:02,663 - INFO - 📊 STDERR length: 0 chars
+2025-11-08 00:22:02,664 - INFO - 🚨 SQLMap detected: SQL Injection Vulnerability (indicator: 'is vulnerable')
+2025-11-08 00:22:02,665 - INFO - 🎯 Injection point identified: sqlmap identified the following injection point(s) with a total of 57 HTTP(s) requests:
+2025-11-08 00:22:02,666 - INFO - 🔍 Found parameter: Parameter: cat (GET)
+2025-11-08 00:22:02,667 - INFO - 🔍 Vulnerability title: Title: AND boolean-based blind - WHERE or HAVING clause
+2025-11-08 00:22:02,667 - INFO - 🔍 Payload found: Payload: cat=1 AND 2786=2786...
+2025-11-08 00:22:02,668 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)
+2025-11-08 00:22:02,668 - INFO - 🔍 Payload found: Payload: cat=1 AND GTID_SUBSET(CONCAT(0x7178706a71,(SELECT (ELT(2097=2097,1))),0...
+2025-11-08 00:22:02,669 - INFO - 🔍 Vulnerability title: Title: MySQL > 5.0.12 AND time-based blind (heavy query)
+2025-11-08 00:22:02,670 - INFO - 🔍 Payload found: Payload: cat=1 AND 8749=(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFO...
+2025-11-08 00:22:02,671 - INFO - 🔍 Vulnerability title: Title: Generic UNION query (NULL) - 11 columns
+2025-11-08 00:22:02,671 - INFO - 🔍 Payload found: Payload: cat=1 UNION ALL SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,CON...
+2025-11-08 00:22:02,672 - INFO - 💾 back-end DBMS: MySQL >= 5.6
+2025-11-08 00:22:02,673 - INFO - ✅ SQLMap scan completed - VULNERABLE! Found 14 details
+2025-11-08 00:22:02,674 - INFO - SQLMap found 1 vulnerable parameters
+2025-11-08 00:22:02,674 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2025-11-08 00:51:34,989 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:51:34,990 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:52:21,682 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 00:52:21,682 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 00:52:21,685 - INFO - Found 9 matches in Gobuster output
+2025-11-08 00:52:21,687 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 00:52:21,688 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 00:52:21,688 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 00:52:21,689 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 00:52:21,689 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 00:52:21,689 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 00:52:21,690 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 00:52:21,690 - INFO - Running SQLMap scan
+2025-11-08 00:52:21,691 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 00:52:21,969 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-08 00:52:21,970 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-08 00:52:21,970 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-08 00:54:16,817 - INFO - 📊 SQLMap exit code: 0
+2025-11-08 00:54:16,818 - INFO - 📊 STDOUT length: 7246 chars
+2025-11-08 00:54:16,819 - INFO - 📊 STDERR length: 0 chars
+2025-11-08 00:54:16,820 - INFO - 🚨 SQLMap detected: SQL Injection Vulnerability (indicator: 'is vulnerable')
+2025-11-08 00:54:16,821 - INFO - 🎯 Injection point identified: sqlmap identified the following injection point(s) with a total of 60 HTTP(s) requests:
+2025-11-08 00:54:16,821 - INFO - 🔍 Found parameter: Parameter: cat (GET)
+2025-11-08 00:54:16,821 - INFO - 🔍 Vulnerability title: Title: AND boolean-based blind - WHERE or HAVING clause
+2025-11-08 00:54:16,822 - INFO - 🔍 Payload found: Payload: cat=1 AND 8343=8343...
+2025-11-08 00:54:16,822 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)
+2025-11-08 00:54:16,823 - INFO - 🔍 Payload found: Payload: cat=1 AND GTID_SUBSET(CONCAT(0x71626a7071,(SELECT (ELT(6854=6854,1))),0...
+2025-11-08 00:54:16,823 - INFO - 🔍 Vulnerability title: Title: MySQL > 5.0.12 AND time-based blind (heavy query)
+2025-11-08 00:54:16,823 - INFO - 🔍 Payload found: Payload: cat=1 AND 1636=(SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS A, INFO...
+2025-11-08 00:54:16,824 - INFO - 🔍 Vulnerability title: Title: Generic UNION query (NULL) - 11 columns
+2025-11-08 00:54:16,824 - INFO - 🔍 Payload found: Payload: cat=1 UNION ALL SELECT CONCAT(0x71626a7071,0x585852686b4369546a6c65754c...
+2025-11-08 00:54:16,824 - INFO - 💾 back-end DBMS: MySQL >= 5.6
+2025-11-08 00:54:16,825 - INFO - ✅ SQLMap scan completed - VULNERABLE! Found 14 details
+2025-11-08 00:54:16,825 - INFO - SQLMap found 1 vulnerable parameters
+2025-11-08 00:54:16,825 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2025-11-08 03:11:46,972 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 03:11:46,974 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 03:12:30,157 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 03:12:30,158 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 03:12:30,161 - INFO - Found 9 matches in Gobuster output
+2025-11-08 03:12:30,161 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 03:12:30,162 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 03:12:30,163 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 03:12:30,163 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 03:12:30,164 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 03:12:30,164 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 03:12:30,165 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 03:12:30,165 - INFO - Running Nmap scan
+2025-11-08 03:12:37,850 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-08 03:12:37,851 - INFO - Nmap open_ports count: 0
+2025-11-08 03:12:37,851 - INFO - Added 0 Nmap ports. Total: 9
+2025-11-08 03:12:37,852 - INFO - Vulnerability scan completed successfully. Total findings: 9
+2025-11-08 03:12:52,106 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 03:12:52,107 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 03:13:48,468 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 03:13:48,468 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 03:13:48,468 - INFO - Found 9 matches in Gobuster output
+2025-11-08 03:13:48,469 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 03:13:48,469 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 03:13:48,470 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 03:13:48,470 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 03:13:48,470 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 03:13:48,471 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 03:13:48,471 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 03:13:48,471 - INFO - Vulnerability scan completed successfully. Total findings: 9
+2025-11-08 03:14:27,330 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 03:14:27,330 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 03:15:04,357 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 03:15:04,358 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 03:15:04,359 - INFO - Found 9 matches in Gobuster output
+2025-11-08 03:15:04,359 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 03:15:04,360 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 03:15:04,361 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 03:15:04,361 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 03:15:04,362 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 03:15:04,362 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 03:15:04,363 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 03:15:04,363 - INFO - Running SQLMap scan
+2025-11-08 03:15:04,364 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 03:15:04,661 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-08 03:15:04,662 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-08 03:15:04,662 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-08 03:15:53,762 - INFO - 📊 SQLMap exit code: 0
+2025-11-08 03:15:53,763 - INFO - 📊 STDOUT length: 5859 chars
+2025-11-08 03:15:53,763 - INFO - 📊 STDERR length: 0 chars
+2025-11-08 03:15:53,763 - INFO - 🚨 SQLMap detected: SQL Injection Vulnerability (indicator: 'is vulnerable')
+2025-11-08 03:15:53,764 - INFO - 🎯 Injection point identified: sqlmap identified the following injection point(s) with a total of 51 HTTP(s) requests:
+2025-11-08 03:15:53,778 - INFO - 🔍 Found parameter: Parameter: cat (GET)
+2025-11-08 03:15:53,779 - INFO - 🔍 Vulnerability title: Title: AND boolean-based blind - WHERE or HAVING clause
+2025-11-08 03:15:53,780 - INFO - 🔍 Payload found: Payload: cat=1 AND 8278=8278...
+2025-11-08 03:15:53,781 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)
+2025-11-08 03:15:53,782 - INFO - 🔍 Payload found: Payload: cat=1 AND GTID_SUBSET(CONCAT(0x717a707871,(SELECT (ELT(6333=6333,1))),0...
+2025-11-08 03:15:53,782 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+2025-11-08 03:15:53,783 - INFO - 🔍 Payload found: Payload: cat=1 AND (SELECT 7153 FROM (SELECT(SLEEP(5)))lTor)...
+2025-11-08 03:15:53,783 - INFO - 🔍 Vulnerability title: Title: Generic UNION query (NULL) - 11 columns
+2025-11-08 03:15:53,784 - INFO - 🔍 Payload found: Payload: cat=1 UNION ALL SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,CONCAT(0...
+2025-11-08 03:15:53,785 - INFO - 💾 back-end DBMS: MySQL >= 5.6
+2025-11-08 03:15:53,786 - INFO - ✅ SQLMap scan completed - VULNERABLE! Found 14 details
+2025-11-08 03:15:53,787 - INFO - SQLMap found 1 vulnerable parameters
+2025-11-08 03:15:53,787 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2025-11-08 04:28:31,168 - INFO - /app/Gobuster/views.py changed, reloading.
+2025-11-08 04:29:06,809 - INFO - /app/Gobuster/views.py changed, reloading.
+2025-11-08 04:29:35,741 - INFO - /app/Gobuster/views.py changed, reloading.
+2025-11-08 04:30:34,164 - INFO - /app/Gobuster/views.py changed, reloading.
+2025-11-08 04:32:51,013 - INFO - /app/Gobuster/views.py changed, reloading.
+2025-11-08 04:34:29,956 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 04:34:29,962 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 04:35:10,122 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 04:35:10,123 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 04:36:16,811 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 04:36:16,812 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 04:36:16,813 - INFO - Found 9 matches in Gobuster output
+2025-11-08 04:36:16,813 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 04:36:16,813 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 04:36:16,819 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 04:36:16,820 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 04:36:16,820 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 04:36:16,821 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 04:36:16,821 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 04:36:16,822 - INFO - Running SQLMap scan
+2025-11-08 04:36:16,822 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 04:36:17,096 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-08 04:36:17,098 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-08 04:36:17,103 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-08 04:36:56,578 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 04:36:56,580 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 04:36:56,581 - INFO - Found 9 matches in Gobuster output
+2025-11-08 04:36:56,582 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 04:36:56,587 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 04:36:56,587 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 04:36:56,588 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 04:36:56,588 - INFO - Parsed: /infos.php -> Status 200
+2025-11-08 04:36:56,588 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 04:36:56,589 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 04:36:56,589 - INFO - Running Nmap scan
+2025-11-08 04:37:33,662 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-08 04:37:33,662 - INFO - Nmap open_ports count: 1
+2025-11-08 04:37:33,663 - INFO - Added 1 Nmap ports. Total: 10
+2025-11-08 04:37:33,663 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2025-11-08 04:37:34,701 - INFO - 📊 SQLMap exit code: 0
+2025-11-08 04:37:34,702 - INFO - 📊 STDOUT length: 6091 chars
+2025-11-08 04:37:34,702 - INFO - 📊 STDERR length: 0 chars
+2025-11-08 04:37:34,702 - INFO - 🚨 SQLMap detected: SQL Injection Vulnerability (indicator: 'is vulnerable')
+2025-11-08 04:37:34,703 - INFO - 🎯 Injection point identified: sqlmap identified the following injection point(s) with a total of 49 HTTP(s) requests:
+2025-11-08 04:37:34,703 - INFO - 🔍 Found parameter: Parameter: cat (GET)
+2025-11-08 04:37:34,704 - INFO - 🔍 Vulnerability title: Title: AND boolean-based blind - WHERE or HAVING clause
+2025-11-08 04:37:34,705 - INFO - 🔍 Payload found: Payload: cat=1 AND 3063=3063...
+2025-11-08 04:37:34,706 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)
+2025-11-08 04:37:34,706 - INFO - 🔍 Payload found: Payload: cat=1 AND GTID_SUBSET(CONCAT(0x71626a7871,(SELECT (ELT(2352=2352,1))),0...
+2025-11-08 04:37:34,707 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.0.12 OR time-based blind (query SLEEP)
+2025-11-08 04:37:34,707 - INFO - 🔍 Payload found: Payload: cat=1 OR (SELECT 9272 FROM (SELECT(SLEEP(5)))MrGq)...
+2025-11-08 04:37:34,707 - INFO - 🔍 Vulnerability title: Title: Generic UNION query (NULL) - 11 columns
+2025-11-08 04:37:34,708 - INFO - 🔍 Payload found: Payload: cat=1 UNION ALL SELECT NULL,CONCAT(0x71626a7871,0x4a7472694652596765674...
+2025-11-08 04:37:34,708 - INFO - 💾 back-end DBMS: MySQL >= 5.6
+2025-11-08 04:37:34,709 - INFO - ✅ SQLMap scan completed - VULNERABLE! Found 14 details
+2025-11-08 04:37:34,709 - INFO - SQLMap found 1 vulnerable parameters
+2025-11-08 04:37:34,709 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2025-11-08 04:40:29,880 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 04:40:29,885 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 04:43:35,674 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 04:43:35,675 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 04:43:35,676 - INFO - Found 9 matches in Gobuster output
+2025-11-08 04:43:35,676 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 04:43:35,676 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 04:43:35,676 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 04:43:35,677 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 04:43:35,677 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 04:43:35,677 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 04:43:35,678 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 04:43:35,678 - INFO - Running Nikto scan
+2025-11-08 04:43:35,678 - INFO - Running Nikto scan on http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 04:43:35,680 - INFO - Executing: nikto -h http://testphp.vulnweb.com/listproducts.php?cat=1 -Format json -o /tmp/tmphkp0p908.json -timeout 300 -ssl
+2025-11-08 04:43:35,873 - WARNING - Failed to parse Nikto JSON output: Expecting value: line 1 column 1 (char 0)
+2025-11-08 04:43:35,873 - INFO - Added 0 Nikto vulnerabilities. Total: 9
+2025-11-08 04:43:35,874 - INFO - Vulnerability scan completed successfully. Total findings: 9
+2025-11-08 05:07:15,232 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-08 05:07:15,243 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-08 05:08:31,411 - INFO - Parsing Gobuster results, length: 652
+2025-11-08 05:08:31,413 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin/             (Status: 403) [Size: 276]
+cgi-bin              (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-08 05:08:31,414 - INFO - Found 14 matches in Gobuster output
+2025-11-08 05:08:31,414 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-08 05:08:31,415 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-08 05:08:31,415 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-08 05:08:31,416 - INFO - Parsed: /CVS -> Status 200
+2025-11-08 05:08:31,416 - INFO - Parsed: /admin -> Status 200
+2025-11-08 05:08:31,416 - INFO - Total parsed: 9 directories, 3 files
+2025-11-08 05:08:31,417 - INFO - Initial total_findings from Gobuster: 12
+2025-11-08 05:08:31,418 - INFO - Running Nikto scan
+2025-11-08 05:08:31,418 - INFO - Running Nikto scan on http://testphp.vulnweb.com
+2025-11-08 05:08:31,420 - INFO - Executing: nikto -h http://testphp.vulnweb.com -Format json -o /tmp/tmpwfd5xs7t.json -timeout 300 -ssl
+2025-11-08 05:08:31,466 - WARNING - Failed to parse Nikto JSON output: Expecting value: line 1 column 1 (char 0)
+2025-11-08 05:08:31,468 - INFO - Added 0 Nikto vulnerabilities. Total: 12
+2025-11-08 05:08:31,469 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-08 09:21:36,422 - INFO - Starting vulnerability scan for https://httpbin.org
+2025-11-08 09:21:36,424 - INFO - Running Gobuster for https://httpbin.org
+2025-11-08 09:21:46,440 - ERROR - Gobuster scan failed: 2025/11/08 09:21:46 error on running gobuster on https://httpbin.org/: timeout occurred during the request
+
+2025-11-08 09:21:46,441 - INFO - Initial total_findings from Gobuster: 0
+2025-11-08 09:21:46,441 - INFO - Running Nmap scan
+2025-11-08 09:21:51,643 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-08 09:21:51,643 - INFO - Nmap open_ports count: 0
+2025-11-08 09:21:51,643 - INFO - Added 0 Nmap ports. Total: 0
+2025-11-08 09:21:51,643 - INFO - Vulnerability scan completed successfully. Total findings: 0
+2025-11-08 09:24:19,470 - INFO - Starting vulnerability scan for https://scanme.nmap.org/
+2025-11-08 09:24:19,472 - INFO - Running Gobuster for https://scanme.nmap.org/
+2025-11-08 09:24:20,250 - ERROR - Gobuster scan failed: 2025/11/08 09:24:20 error on running gobuster on https://scanme.nmap.org/: connection refused
+
+2025-11-08 09:24:20,250 - INFO - Initial total_findings from Gobuster: 0
+2025-11-08 09:24:20,250 - INFO - Running Nmap scan
+2025-11-08 09:24:34,905 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-08 09:24:34,906 - INFO - Nmap open_ports count: 2
+2025-11-08 09:24:34,906 - INFO - Added 2 Nmap ports. Total: 2
+2025-11-08 09:24:34,907 - INFO - Vulnerability scan completed successfully. Total findings: 2
+2025-11-08 09:26:04,053 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 09:26:04,054 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 09:27:00,029 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 09:27:00,029 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 09:27:00,030 - INFO - Found 9 matches in Gobuster output
+2025-11-08 09:27:00,030 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 09:27:00,030 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 09:27:00,030 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 09:27:00,031 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 09:27:00,031 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 09:27:00,031 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 09:27:00,031 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 09:27:00,031 - INFO - Running Nmap scan
+2025-11-08 09:27:02,231 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-08 09:27:02,232 - INFO - Nmap open_ports count: 0
+2025-11-08 09:27:02,232 - INFO - Added 0 Nmap ports. Total: 9
+2025-11-08 09:27:02,232 - INFO - Vulnerability scan completed successfully. Total findings: 9
+2025-11-08 09:31:54,284 - INFO - Received GitHub webhook: pull_request
+2025-11-08 09:32:26,445 - INFO - Received GitHub webhook: pull_request
+2025-11-08 09:32:26,457 - INFO - Created/updated scan for PR #9 in CoderFleet/splash.fun
+2025-11-08 09:33:20,097 - INFO - Received Netlify webhook: ready
+2025-11-08 09:33:20,107 - INFO - Starting scans for PR #9 at https://deploy-preview-9--splashkafun.netlify.app
+2025-11-08 09:33:20,109 - INFO - Waiting for preview deployment: https://deploy-preview-9--splashkafun.netlify.app
+2025-11-08 09:33:20,209 - WARNING - Invalid GitHub webhook signature
+2025-11-08 09:33:20,215 - WARNING - Forbidden: /api/github/webhook/
+2025-11-08 09:33:24,430 - INFO - Preview deployment is ready: https://deploy-preview-9--splashkafun.netlify.app
+2025-11-08 09:33:24,436 - INFO - [PR #9] Starting security scans on https://deploy-preview-9--splashkafun.netlify.app
+2025-11-08 09:33:24,438 - INFO - [PR #9] Running directory enumeration...
+2025-11-08 09:33:24,438 - INFO - Starting vulnerability scan for https://deploy-preview-9--splashkafun.netlify.app
+2025-11-08 09:33:24,438 - INFO - Running Gobuster for https://deploy-preview-9--splashkafun.netlify.app
+2025-11-08 11:49:54,349 - INFO - Added monitored repository: vercel/next.js (ID: 70107786)
+2025-11-08 11:50:13,770 - INFO - Deactivated monitored repository: vercel/next.js
+2025-11-08 12:06:19,695 - INFO - /app/vulncraft/settings.py changed, reloading.
+2025-11-08 12:13:00,911 - WARNING - Method Not Allowed (HEAD): /api/github/monitored/
+2025-11-08 13:15:32,644 - INFO - Received GitHub webhook: ping
+2025-11-08 13:20:18,045 - INFO - /app/vulncraft/settings.py changed, reloading.
+2025-11-08 13:20:53,889 - INFO - /app/vulncraft/settings.py changed, reloading.
+2025-11-08 13:21:42,363 - INFO - /app/vulncraft/settings.py changed, reloading.
+2025-11-08 13:25:20,764 - INFO - /app/vulncraft/settings.py changed, reloading.
+2025-11-08 13:25:27,171 - INFO - /app/vulncraft/settings.py changed, reloading.
+2025-11-08 13:25:40,657 - INFO - /app/github_integration/models.py changed, reloading.
+2025-11-08 13:26:03,241 - INFO - /app/github_integration/views.py changed, reloading.
+2025-11-08 13:26:33,989 - INFO - /app/github_integration/models.py changed, reloading.
+2025-11-08 13:26:36,292 - INFO - /app/github_integration/views.py changed, reloading.
+2025-11-08 13:26:52,809 - INFO - /app/github_integration/views.py changed, reloading.
+2025-11-08 13:26:58,154 - INFO - /app/github_integration/views.py changed, reloading.
+2025-11-08 13:49:45,018 - INFO - /app/vulncraft/settings.py changed, reloading.
+2025-11-08 13:50:14,377 - INFO - /app/vulncraft/settings.py changed, reloading.
+2025-11-08 14:12:45,496 - INFO - Received GitHub webhook: pull_request
+2025-11-08 14:12:45,511 - INFO - Repository CoderFleet/Veritas is not monitored
+2025-11-08 14:22:11,586 - INFO - Received GitHub webhook: installation_repositories
+2025-11-08 14:22:11,587 - INFO - GitHub App installation_repositories event: removed (installation_id: 93705317)
+2025-11-08 14:22:23,000 - INFO - Received GitHub webhook: installation_repositories
+2025-11-08 14:22:23,001 - INFO - GitHub App installation_repositories event: added (installation_id: 93705317)
+2025-11-08 14:22:23,014 - INFO - Added repository to monitoring: CoderFleet/Veritas
+2025-11-08 14:24:28,066 - INFO - Received GitHub webhook: pull_request
+2025-11-08 14:24:28,082 - INFO - Created/updated scan for PR #3 in CoderFleet/Veritas
+2025-11-08 14:48:03,834 - INFO - Received GitHub webhook: pull_request
+2025-11-08 14:48:03,850 - INFO - Created/updated scan for PR #4 in CoderFleet/Veritas
+2025-11-08 14:55:05,855 - INFO - Received GitHub webhook: installation
+2025-11-08 14:55:05,857 - INFO - GitHub App installation event: new_permissions_accepted by CoderFleet (installation_id: 93705317)
+2025-11-08 14:58:43,272 - INFO - Received GitHub webhook: pull_request
+2025-11-08 14:58:43,291 - INFO - Created/updated scan for PR #5 in CoderFleet/Veritas
+2025-11-08 15:01:49,349 - INFO - Received GitHub webhook: installation_repositories
+2025-11-08 15:01:49,351 - INFO - GitHub App installation_repositories event: removed (installation_id: 93705317)
+2025-11-08 15:01:49,366 - INFO - Deactivated repository: CoderFleet/Veritas
+2025-11-08 15:08:44,897 - INFO - Received GitHub webhook: installation_repositories
+2025-11-08 15:08:44,898 - INFO - GitHub App installation_repositories event: added (installation_id: 93705317)
+2025-11-08 15:08:44,920 - INFO - Reactivated repository: CoderFleet/splash.fun
+2025-11-08 15:09:59,065 - INFO - Received GitHub webhook: pull_request
+2025-11-08 15:10:41,710 - INFO - Received GitHub webhook: pull_request
+2025-11-08 15:10:41,727 - INFO - Created/updated scan for PR #10 in CoderFleet/splash.fun
+2025-11-08 15:11:40,148 - WARNING - Invalid GitHub webhook signature
+2025-11-08 15:11:40,156 - WARNING - Forbidden: /api/github/webhook/
+2025-11-08 15:11:40,219 - INFO - Received Netlify webhook: ready
+2025-11-08 15:11:40,236 - INFO - Starting scans for PR #10 at https://deploy-preview-10--splashkafun.netlify.app
+2025-11-08 15:11:40,239 - INFO - Waiting for preview deployment: https://deploy-preview-10--splashkafun.netlify.app
+2025-11-08 15:11:44,916 - INFO - Preview deployment is ready: https://deploy-preview-10--splashkafun.netlify.app
+2025-11-08 15:11:44,935 - INFO - [PR #10] Starting security scans on https://deploy-preview-10--splashkafun.netlify.app
+2025-11-08 15:11:44,940 - INFO - [PR #10] Running directory enumeration...
+2025-11-08 15:11:44,941 - INFO - Starting vulnerability scan for https://deploy-preview-10--splashkafun.netlify.app
+2025-11-08 15:11:44,941 - INFO - Running Gobuster for https://deploy-preview-10--splashkafun.netlify.app
+2025-11-08 18:25:56,750 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 18:25:56,750 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 18:25:56,752 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 18:25:56,752 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 18:26:40,014 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 18:26:40,014 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 18:26:40,015 - INFO - Found 9 matches in Gobuster output
+2025-11-08 18:26:40,016 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 18:26:40,016 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 18:26:40,017 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 18:26:40,017 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 18:26:40,017 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 18:26:40,018 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 18:26:40,018 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 18:26:40,018 - INFO - Running SQLMap scan
+2025-11-08 18:26:40,019 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 18:26:40,338 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-08 18:26:40,339 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-08 18:26:40,339 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-08 18:26:40,374 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 18:26:40,375 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 18:26:40,375 - INFO - Found 9 matches in Gobuster output
+2025-11-08 18:26:40,376 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 18:26:40,376 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 18:26:40,376 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 18:26:40,376 - INFO - Parsed: /infos.php -> Status 200
+2025-11-08 18:26:40,377 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 18:26:40,377 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 18:26:40,377 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 18:26:40,378 - INFO - Running Nmap scan
+2025-11-08 18:27:07,641 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-08 18:27:07,642 - INFO - Nmap open_ports count: 1
+2025-11-08 18:27:07,643 - INFO - Added 1 Nmap ports. Total: 10
+2025-11-08 18:27:07,643 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2025-11-08 18:27:15,588 - INFO - 📊 SQLMap exit code: 0
+2025-11-08 18:27:15,589 - INFO - 📊 STDOUT length: 5815 chars
+2025-11-08 18:27:15,589 - INFO - 📊 STDERR length: 0 chars
+2025-11-08 18:27:15,589 - INFO - 🚨 SQLMap detected: SQL Injection Vulnerability (indicator: 'is vulnerable')
+2025-11-08 18:27:15,590 - INFO - 🎯 Injection point identified: sqlmap identified the following injection point(s) with a total of 48 HTTP(s) requests:
+2025-11-08 18:27:15,590 - INFO - 🔍 Found parameter: Parameter: cat (GET)
+2025-11-08 18:27:15,591 - INFO - 🔍 Vulnerability title: Title: AND boolean-based blind - WHERE or HAVING clause
+2025-11-08 18:27:15,591 - INFO - 🔍 Payload found: Payload: cat=1 AND 3756=3756...
+2025-11-08 18:27:15,591 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)
+2025-11-08 18:27:15,592 - INFO - 🔍 Payload found: Payload: cat=1 AND GTID_SUBSET(CONCAT(0x716a786b71,(SELECT (ELT(3741=3741,1))),0...
+2025-11-08 18:27:15,592 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+2025-11-08 18:27:15,592 - INFO - 🔍 Payload found: Payload: cat=1 AND (SELECT 4720 FROM (SELECT(SLEEP(5)))pzRM)...
+2025-11-08 18:27:15,593 - INFO - 🔍 Vulnerability title: Title: Generic UNION query (NULL) - 11 columns
+2025-11-08 18:27:15,593 - INFO - 🔍 Payload found: Payload: cat=1 UNION ALL SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,CON...
+2025-11-08 18:27:15,593 - INFO - 💾 back-end DBMS: MySQL >= 5.6
+2025-11-08 18:27:15,593 - INFO - ✅ SQLMap scan completed - VULNERABLE! Found 14 details
+2025-11-08 18:27:15,594 - INFO - SQLMap found 1 vulnerable parameters
+2025-11-08 18:27:15,594 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2025-11-08 18:30:34,554 - INFO - Starting vulnerability scan for http://localhost:5000
+2025-11-08 18:30:34,555 - INFO - Running Gobuster for http://localhost:5000
+2025-11-08 18:30:34,565 - ERROR - Gobuster scan failed: 2025/11/08 18:30:34 error on running gobuster on http://localhost:5000/: connection refused
+
+2025-11-08 18:30:34,565 - INFO - Initial total_findings from Gobuster: 0
+2025-11-08 18:30:34,566 - INFO - Running Nmap scan
+2025-11-08 18:30:34,728 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-08 18:30:34,728 - INFO - Nmap open_ports count: 0
+2025-11-08 18:30:34,729 - INFO - Added 0 Nmap ports. Total: 0
+2025-11-08 18:30:34,729 - INFO - Vulnerability scan completed successfully. Total findings: 0
+2025-11-08 18:34:21,737 - INFO - Starting vulnerability scan for http://localhost:5000
+2025-11-08 18:34:21,738 - INFO - Running Gobuster for http://localhost:5000
+2025-11-08 18:34:21,778 - ERROR - Gobuster scan failed: 2025/11/08 18:34:21 error on running gobuster on http://localhost:5000/: connection refused
+
+2025-11-08 18:34:21,778 - INFO - Initial total_findings from Gobuster: 0
+2025-11-08 18:34:21,779 - INFO - Running Nmap scan
+2025-11-08 18:34:21,942 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-08 18:34:21,942 - INFO - Nmap open_ports count: 0
+2025-11-08 18:34:21,943 - INFO - Added 0 Nmap ports. Total: 0
+2025-11-08 18:34:21,943 - INFO - Vulnerability scan completed successfully. Total findings: 0
+2025-11-08 18:37:42,946 - INFO - Starting vulnerability scan for http://host.docker.internal:5000
+2025-11-08 18:37:42,947 - INFO - Running Gobuster for http://host.docker.internal:5000
+2025-11-08 18:37:43,150 - ERROR - Gobuster scan failed: 2025/11/08 18:37:43 error on running gobuster on http://host.docker.internal:5000/: unable to connect to http://host.docker.internal:5000/: Get "http://host.docker.internal:5000/": dial tcp: lookup host.docker.internal on 127.0.0.11:53: no such host
+
+2025-11-08 18:37:43,150 - INFO - Initial total_findings from Gobuster: 0
+2025-11-08 18:37:43,150 - INFO - Running Nmap scan
+2025-11-08 18:37:43,249 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-08 18:37:43,249 - INFO - Nmap open_ports count: 0
+2025-11-08 18:37:43,250 - INFO - Added 0 Nmap ports. Total: 0
+2025-11-08 18:37:43,250 - INFO - Vulnerability scan completed successfully. Total findings: 0
+2025-11-08 18:41:51,014 - INFO - Starting vulnerability scan for http://host.docker.internal:5000
+2025-11-08 18:41:51,015 - INFO - Running Gobuster for http://host.docker.internal:5000
+2025-11-08 18:41:51,120 - ERROR - Gobuster scan failed: 2025/11/08 18:41:51 error on running gobuster on http://host.docker.internal:5000/: unable to connect to http://host.docker.internal:5000/: Get "http://host.docker.internal:5000/": dial tcp: lookup host.docker.internal on 127.0.0.11:53: no such host
+
+2025-11-08 18:41:51,120 - INFO - Initial total_findings from Gobuster: 0
+2025-11-08 18:41:51,121 - INFO - Running Nmap scan
+2025-11-08 18:41:51,221 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-08 18:41:51,222 - INFO - Nmap open_ports count: 0
+2025-11-08 18:41:51,222 - INFO - Added 0 Nmap ports. Total: 0
+2025-11-08 18:41:51,222 - INFO - Vulnerability scan completed successfully. Total findings: 0
+2025-11-08 18:44:33,807 - INFO - Starting vulnerability scan for http://172.17.0.1:5000
+2025-11-08 18:44:33,807 - INFO - Running Gobuster for http://172.17.0.1:5000
+2025-11-08 18:45:03,844 - ERROR - Gobuster scan failed: 2025/11/08 18:45:03 error on running gobuster on http://172.17.0.1:5000/: timeout occurred during the request
+
+2025-11-08 18:45:03,844 - INFO - Initial total_findings from Gobuster: 0
+2025-11-08 18:45:03,845 - INFO - Running Nmap scan
+2025-11-08 18:45:03,957 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-08 18:45:03,957 - INFO - Nmap open_ports count: 0
+2025-11-08 18:45:03,957 - INFO - Added 0 Nmap ports. Total: 0
+2025-11-08 18:45:03,958 - INFO - Vulnerability scan completed successfully. Total findings: 0
+2025-11-08 18:46:35,124 - INFO - Starting vulnerability scan for http://172.17.0.1:5000
+2025-11-08 18:46:35,124 - INFO - Running Gobuster for http://172.17.0.1:5000
+2025-11-08 18:47:05,150 - ERROR - Gobuster scan failed: 2025/11/08 18:47:05 error on running gobuster on http://172.17.0.1:5000/: timeout occurred during the request
+
+2025-11-08 18:47:05,151 - INFO - Initial total_findings from Gobuster: 0
+2025-11-08 18:47:05,151 - INFO - Running SQLMap scan
+2025-11-08 18:47:05,152 - INFO - 🚀 Starting SQLMap scan on http://172.17.0.1:5000
+2025-11-08 18:47:05,609 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-08 18:47:05,610 - INFO - 📝 SQLMap command: sqlmap -u http://172.17.0.1:5000 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-08 18:47:05,610 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-08 18:48:06,254 - INFO - 📊 SQLMap exit code: 0
+2025-11-08 18:48:06,254 - INFO - 📊 STDOUT length: 1618 chars
+2025-11-08 18:48:06,255 - INFO - 📊 STDERR length: 0 chars
+2025-11-08 18:48:06,255 - INFO - ✅ SQLMap scan completed - No SQL injection vulnerabilities detected
+2025-11-08 18:48:06,255 - INFO - Vulnerability scan completed successfully. Total findings: 0
+2025-11-08 18:50:50,312 - INFO - Starting vulnerability scan for http://172.17.0.1:5000
+2025-11-08 18:50:50,313 - INFO - Running Gobuster for http://172.17.0.1:5000
+2025-11-08 18:51:20,349 - ERROR - Gobuster scan failed: 2025/11/08 18:51:20 error on running gobuster on http://172.17.0.1:5000/: timeout occurred during the request
+
+2025-11-08 18:51:20,350 - INFO - Initial total_findings from Gobuster: 0
+2025-11-08 18:51:20,350 - INFO - Running SQLMap scan
+2025-11-08 18:51:20,351 - INFO - 🚀 Starting SQLMap scan on http://172.17.0.1:5000
+2025-11-08 18:51:20,651 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-08 18:51:20,651 - INFO - 📝 SQLMap command: sqlmap -u http://172.17.0.1:5000 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-08 18:51:20,652 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-08 18:52:21,201 - INFO - 📊 SQLMap exit code: 0
+2025-11-08 18:52:21,202 - INFO - 📊 STDOUT length: 1639 chars
+2025-11-08 18:52:21,202 - INFO - 📊 STDERR length: 0 chars
+2025-11-08 18:52:21,203 - INFO - ✅ SQLMap scan completed - No SQL injection vulnerabilities detected
+2025-11-08 18:52:21,203 - INFO - Vulnerability scan completed successfully. Total findings: 0
+2025-11-08 18:54:38,889 - INFO - Starting vulnerability scan for http://172.17.0.1:5000
+2025-11-08 18:54:38,889 - INFO - Running Gobuster for http://172.17.0.1:5000
+2025-11-08 18:55:08,923 - ERROR - Gobuster scan failed: 2025/11/08 18:55:08 error on running gobuster on http://172.17.0.1:5000/: timeout occurred during the request
+
+2025-11-08 18:55:08,926 - INFO - Initial total_findings from Gobuster: 0
+2025-11-08 18:55:08,926 - INFO - Running SQLMap scan
+2025-11-08 18:55:08,927 - INFO - 🚀 Starting SQLMap scan on http://172.17.0.1:5000
+2025-11-08 18:55:09,273 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-08 18:55:09,274 - INFO - 📝 SQLMap command: sqlmap -u http://172.17.0.1:5000 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-08 18:55:09,274 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-08 18:56:09,874 - INFO - 📊 SQLMap exit code: 0
+2025-11-08 18:56:09,875 - INFO - 📊 STDOUT length: 1656 chars
+2025-11-08 18:56:09,875 - INFO - 📊 STDERR length: 0 chars
+2025-11-08 18:56:09,876 - INFO - ✅ SQLMap scan completed - No SQL injection vulnerabilities detected
+2025-11-08 18:56:09,876 - INFO - Vulnerability scan completed successfully. Total findings: 0
+2025-11-08 19:01:55,790 - INFO - Starting vulnerability scan for http://172.17.0.1:5000
+2025-11-08 19:01:55,790 - INFO - Running Gobuster for http://172.17.0.1:5000
+2025-11-08 19:02:25,829 - ERROR - Gobuster scan failed: 2025/11/08 19:02:25 error on running gobuster on http://172.17.0.1:5000/: timeout occurred during the request
+
+2025-11-08 19:02:25,830 - INFO - Initial total_findings from Gobuster: 0
+2025-11-08 19:02:25,831 - INFO - Running SQLMap scan
+2025-11-08 19:02:25,832 - INFO - 🚀 Starting SQLMap scan on http://172.17.0.1:5000
+2025-11-08 19:02:26,126 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-08 19:02:26,126 - INFO - 📝 SQLMap command: sqlmap -u http://172.17.0.1:5000 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-08 19:02:26,126 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-08 19:03:26,667 - INFO - 📊 SQLMap exit code: 0
+2025-11-08 19:03:26,668 - INFO - 📊 STDOUT length: 1657 chars
+2025-11-08 19:03:26,668 - INFO - 📊 STDERR length: 0 chars
+2025-11-08 19:03:26,669 - INFO - ✅ SQLMap scan completed - No SQL injection vulnerabilities detected
+2025-11-08 19:03:26,670 - INFO - Vulnerability scan completed successfully. Total findings: 0
+2025-11-08 19:10:12,024 - INFO - Starting vulnerability scan for http://172.17.0.1:5000
+2025-11-08 19:10:12,024 - INFO - Running Gobuster for http://172.17.0.1:5000
+2025-11-08 19:10:42,062 - ERROR - Gobuster scan failed: 2025/11/08 19:10:42 error on running gobuster on http://172.17.0.1:5000/: timeout occurred during the request
+
+2025-11-08 19:10:42,063 - INFO - Initial total_findings from Gobuster: 0
+2025-11-08 19:10:42,064 - INFO - Running SQLMap scan
+2025-11-08 19:10:42,065 - INFO - 🚀 Starting SQLMap scan on http://172.17.0.1:5000
+2025-11-08 19:10:42,356 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-08 19:10:42,356 - INFO - 📝 SQLMap command: sqlmap -u http://172.17.0.1:5000 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-08 19:10:42,357 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-08 19:11:42,904 - INFO - 📊 SQLMap exit code: 0
+2025-11-08 19:11:42,905 - INFO - 📊 STDOUT length: 1671 chars
+2025-11-08 19:11:42,905 - INFO - 📊 STDERR length: 0 chars
+2025-11-08 19:11:42,906 - INFO - ✅ SQLMap scan completed - No SQL injection vulnerabilities detected
+2025-11-08 19:11:42,906 - INFO - Vulnerability scan completed successfully. Total findings: 0
+2025-11-08 19:13:20,723 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 19:13:20,723 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 19:13:53,529 - INFO - Parsing Gobuster results, length: 432
+2025-11-08 19:13:53,530 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2025-11-08 19:13:53,530 - INFO - Found 9 matches in Gobuster output
+2025-11-08 19:13:53,531 - INFO - Parsed: /admin.php -> Status 200
+2025-11-08 19:13:53,531 - INFO - Parsed: /index.php -> Status 200
+2025-11-08 19:13:53,531 - INFO - Parsed: /index2.php -> Status 200
+2025-11-08 19:13:53,531 - INFO - Parsed: /index3.php -> Status 200
+2025-11-08 19:13:53,532 - INFO - Parsed: /info.php -> Status 200
+2025-11-08 19:13:53,532 - INFO - Total parsed: 0 directories, 9 files
+2025-11-08 19:13:53,532 - INFO - Initial total_findings from Gobuster: 9
+2025-11-08 19:13:53,533 - INFO - Running SQLMap scan
+2025-11-08 19:13:53,533 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com/listproducts.php?cat=1
+2025-11-08 19:13:53,821 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-08 19:13:53,822 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-08 19:13:53,822 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-08 19:14:35,790 - INFO - 📊 SQLMap exit code: 0
+2025-11-08 19:14:35,791 - INFO - 📊 STDOUT length: 5814 chars
+2025-11-08 19:14:35,791 - INFO - 📊 STDERR length: 0 chars
+2025-11-08 19:14:35,791 - INFO - 🚨 SQLMap detected: SQL Injection Vulnerability (indicator: 'is vulnerable')
+2025-11-08 19:14:35,792 - INFO - 🎯 Injection point identified: sqlmap identified the following injection point(s) with a total of 49 HTTP(s) requests:
+2025-11-08 19:14:35,792 - INFO - 🔍 Found parameter: Parameter: cat (GET)
+2025-11-08 19:14:35,793 - INFO - 🔍 Vulnerability title: Title: AND boolean-based blind - WHERE or HAVING clause
+2025-11-08 19:14:35,793 - INFO - 🔍 Payload found: Payload: cat=1 AND 9113=9113...
+2025-11-08 19:14:35,793 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)
+2025-11-08 19:14:35,794 - INFO - 🔍 Payload found: Payload: cat=1 AND GTID_SUBSET(CONCAT(0x7162766b71,(SELECT (ELT(7211=7211,1))),0...
+2025-11-08 19:14:35,794 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+2025-11-08 19:14:35,794 - INFO - 🔍 Payload found: Payload: cat=1 AND (SELECT 4614 FROM (SELECT(SLEEP(5)))tidC)...
+2025-11-08 19:14:35,794 - INFO - 🔍 Vulnerability title: Title: Generic UNION query (NULL) - 11 columns
+2025-11-08 19:14:35,795 - INFO - 🔍 Payload found: Payload: cat=1 UNION ALL SELECT NULL,CONCAT(0x7162766b71,0x55484b7a724163516b416...
+2025-11-08 19:14:35,795 - INFO - 💾 back-end DBMS: MySQL >= 5.6
+2025-11-08 19:14:35,795 - INFO - ✅ SQLMap scan completed - VULNERABLE! Found 14 details
+2025-11-08 19:14:35,795 - INFO - SQLMap found 1 vulnerable parameters
+2025-11-08 19:14:35,796 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2025-11-08 20:00:17,470 - ERROR - Failed to fetch monitored repositories: no such table: github_integration_monitoredrepository
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: github_integration_monitoredrepository
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/github_integration/views.py", line 341, in monitored_repositories
+    data = [{
+           ^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 386, in __iter__
+    self._fetch_all()
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: github_integration_monitoredrepository
+2025-11-08 20:00:17,489 - ERROR - Internal Server Error: /api/github/monitored/
+2025-11-08 20:00:26,673 - ERROR - Failed to fetch monitored repositories: no such table: github_integration_monitoredrepository
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: github_integration_monitoredrepository
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/github_integration/views.py", line 341, in monitored_repositories
+    data = [{
+           ^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 386, in __iter__
+    self._fetch_all()
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: github_integration_monitoredrepository
+2025-11-08 20:00:26,676 - ERROR - Internal Server Error: /api/github/monitored/
+2025-11-09 00:16:10,391 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:16:10,391 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:16:10,393 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:16:10,393 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:16:10,619 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:16:10,619 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:16:10,620 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:16:10,620 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:16:28,323 - INFO - Starting vulnerability scan for https://tryhackme.com
+2025-11-09 00:16:28,323 - INFO - Running Gobuster for https://tryhackme.com
+2025-11-09 00:16:30,276 - ERROR - Gobuster scan failed: 2025/11/09 00:16:30 the server returns a status code that matches the provided options for non existing urls. https://tryhackme.com/ebf6d274-50ce-4a51-828a-bf2feff839a2 => 403 (Length: 8608). Please exclude the response length or the status code or set the wildcard option.. To continue please exclude the status code or the length
+
+2025-11-09 00:16:30,277 - INFO - Initial total_findings from Gobuster: 0
+2025-11-09 00:16:30,278 - INFO - Running Nikto scan
+2025-11-09 00:16:30,278 - INFO - Running Nikto scan on https://tryhackme.com
+2025-11-09 00:16:30,280 - INFO - Executing: nikto -h https://tryhackme.com -Format json -o /tmp/tmph9f1ei4j.json -timeout 300 -ssl
+2025-11-09 00:16:30,350 - WARNING - Failed to parse Nikto JSON output: Expecting value: line 1 column 1 (char 0)
+2025-11-09 00:16:30,351 - INFO - Added 0 Nikto vulnerabilities. Total: 0
+2025-11-09 00:16:30,351 - INFO - Vulnerability scan completed successfully. Total findings: 0
+2025-11-09 00:16:51,231 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:16:51,232 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:16:51,233 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:16:51,234 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:16:51,235 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:16:51,236 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:16:51,237 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:16:51,237 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:16:51,238 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:16:51,239 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:16:51,239 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:16:51,259 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:16:51,261 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Root             (Status: 200) [Size: 1]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:16:51,261 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:16:51,262 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:16:51,262 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:16:51,262 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:16:51,263 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:16:51,263 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:16:51,264 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:16:51,264 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:16:51,265 - INFO - 🔍 WPScan requested, checking if site is WordPress...
+2025-11-09 00:16:51,265 - INFO - 🔍 Checking if http://testphp.vulnweb.com is a WordPress site...
+2025-11-09 00:16:51,374 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:16:51,377 - INFO - Gobuster output sample: CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin/             (Status: 403) [Size: 276]
+cgi-bin              (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:16:51,379 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:16:51,380 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:16:51,382 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:16:51,383 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:16:51,383 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:16:51,384 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:16:51,384 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:16:51,385 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:16:51,385 - INFO - Running SQLMap scan
+2025-11-09 00:16:51,385 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com
+2025-11-09 00:16:51,684 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-09 00:16:51,684 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-09 00:16:51,685 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-09 00:16:51,731 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:16:51,732 - INFO - Gobuster output sample: CVS/Entries          (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+images               (Status: 200) [Size: 377]
+index.php            (Status: 200) [
+2025-11-09 00:16:51,733 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:16:51,733 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:16:51,733 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:16:51,733 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:16:51,734 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:16:51,734 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:16:51,734 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:16:51,735 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:16:51,735 - INFO - Running Nikto scan
+2025-11-09 00:16:51,736 - INFO - Running Nikto scan on http://testphp.vulnweb.com
+2025-11-09 00:16:51,736 - INFO - Executing: nikto -h http://testphp.vulnweb.com -Format json -o /tmp/tmpfh2k6_gm.json -timeout 300 -ssl
+2025-11-09 00:16:51,779 - WARNING - Failed to parse Nikto JSON output: Expecting value: line 1 column 1 (char 0)
+2025-11-09 00:16:51,780 - INFO - Added 0 Nikto vulnerabilities. Total: 12
+2025-11-09 00:16:51,780 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:16:54,046 - INFO - 📊 SQLMap exit code: 0
+2025-11-09 00:16:54,047 - INFO - 📊 STDOUT length: 1812 chars
+2025-11-09 00:16:54,047 - INFO - 📊 STDERR length: 0 chars
+2025-11-09 00:16:54,048 - INFO - 🚨 SQLMap detected: Injectable Parameter (indicator: 'injectable')
+2025-11-09 00:16:54,048 - INFO - ✅ No vulnerabilities found - all parameters tested
+2025-11-09 00:16:54,048 - INFO - ✅ SQLMap scan completed - No SQL injection vulnerabilities detected
+2025-11-09 00:16:54,049 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:16:54,862 - INFO - ❌ No WordPress indicators found for http://testphp.vulnweb.com
+2025-11-09 00:16:54,863 - INFO - ❌ Target is not a WordPress site, skipping WPScan
+2025-11-09 00:16:54,865 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:21:36,632 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:21:36,632 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:21:36,636 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:21:36,637 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:22:21,824 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:22:21,824 - INFO - Gobuster output sample: CVS/Root             (Status: 200) [Size: 1]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin/             (Status: 403) [Size: 276]
+cgi-bin              (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:22:21,825 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:22:21,826 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:22:21,827 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:22:21,827 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:22:21,827 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:22:21,828 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:22:21,828 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:22:21,829 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:22:21,830 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:22:23,134 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:22:23,135 - INFO - Gobuster output sample: CVS/Root             (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin/             (Status: 403) [Size: 276]
+cgi-bin              (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:22:23,136 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:22:23,137 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:22:23,137 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:22:23,140 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:22:23,144 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:22:23,148 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:22:23,157 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:22:23,158 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:22:23,163 - INFO - Running SQLMap scan
+2025-11-09 00:22:23,164 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com
+2025-11-09 00:22:23,532 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-09 00:22:23,533 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-09 00:22:23,533 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-09 00:22:26,565 - INFO - 📊 SQLMap exit code: 0
+2025-11-09 00:22:26,566 - INFO - 📊 STDOUT length: 1827 chars
+2025-11-09 00:22:26,567 - INFO - 📊 STDERR length: 0 chars
+2025-11-09 00:22:26,567 - INFO - 🚨 SQLMap detected: Injectable Parameter (indicator: 'injectable')
+2025-11-09 00:22:26,568 - INFO - ✅ No vulnerabilities found - all parameters tested
+2025-11-09 00:22:26,569 - INFO - ✅ SQLMap scan completed - No SQL injection vulnerabilities detected
+2025-11-09 00:22:26,569 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:22:43,197 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:22:43,198 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:22:43,198 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:22:43,199 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:23:30,127 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:23:30,127 - INFO - Gobuster output sample: CVS/Entries          (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:23:30,129 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:23:30,132 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:23:30,134 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:23:30,134 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:23:30,135 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:23:30,135 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:23:30,135 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:23:30,136 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:23:30,136 - INFO - 🔍 WPScan requested, checking if site is WordPress...
+2025-11-09 00:23:30,136 - INFO - 🔍 Checking if http://testphp.vulnweb.com is a WordPress site...
+2025-11-09 00:23:31,912 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:23:31,913 - INFO - Gobuster output sample: CVS/Entries          (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:23:31,914 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:23:31,914 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:23:31,915 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:23:31,915 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:23:31,916 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:23:31,916 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:23:31,916 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:23:31,917 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:23:31,917 - INFO - Running Nikto scan
+2025-11-09 00:23:31,918 - INFO - Running Nikto scan on http://testphp.vulnweb.com
+2025-11-09 00:23:31,918 - INFO - Executing: nikto -h http://testphp.vulnweb.com -Format json -o /tmp/tmpt30cp9tk.json -timeout 300 -ssl
+2025-11-09 00:23:32,035 - WARNING - Failed to parse Nikto JSON output: Expecting value: line 1 column 1 (char 0)
+2025-11-09 00:23:32,035 - INFO - Added 0 Nikto vulnerabilities. Total: 12
+2025-11-09 00:23:32,036 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:23:35,018 - INFO - ❌ No WordPress indicators found for http://testphp.vulnweb.com
+2025-11-09 00:23:35,021 - INFO - ❌ Target is not a WordPress site, skipping WPScan
+2025-11-09 00:23:35,023 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:23:52,017 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:23:52,017 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:24:39,206 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:24:39,207 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Root             (Status: 200) [Size: 1]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:24:39,208 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:24:39,210 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:24:39,211 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:24:39,211 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:24:39,212 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:24:39,212 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:24:39,212 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:24:39,213 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:24:39,213 - INFO - Running Nmap scan
+2025-11-09 00:25:10,268 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-09 00:25:10,272 - INFO - Nmap open_ports count: 1
+2025-11-09 00:25:10,276 - INFO - Added 1 Nmap ports. Total: 13
+2025-11-09 00:25:10,278 - INFO - Vulnerability scan completed successfully. Total findings: 13
+2025-11-09 00:26:20,096 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:26:20,096 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:26:20,096 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:26:20,097 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:27:08,287 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:27:08,289 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:27:08,289 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:27:08,290 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:27:08,290 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:27:08,295 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:27:08,296 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:27:08,297 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:27:08,297 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:27:08,297 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:27:08,298 - INFO - Running SQLMap scan
+2025-11-09 00:27:08,298 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com
+2025-11-09 00:27:08,574 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:27:08,575 - INFO - Gobuster output sample: CVS/Root             (Status: 200) [Size: 1]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:27:08,576 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:27:08,577 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:27:08,578 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:27:08,583 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:27:08,583 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:27:08,584 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:27:08,584 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:27:08,585 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:27:08,585 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:27:08,726 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-09 00:27:08,727 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-09 00:27:08,727 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-09 00:27:11,408 - INFO - 📊 SQLMap exit code: 0
+2025-11-09 00:27:11,409 - INFO - 📊 STDOUT length: 1826 chars
+2025-11-09 00:27:11,409 - INFO - 📊 STDERR length: 0 chars
+2025-11-09 00:27:11,410 - INFO - 🚨 SQLMap detected: Injectable Parameter (indicator: 'injectable')
+2025-11-09 00:27:11,410 - INFO - ✅ No vulnerabilities found - all parameters tested
+2025-11-09 00:27:11,411 - INFO - ✅ SQLMap scan completed - No SQL injection vulnerabilities detected
+2025-11-09 00:27:11,411 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:27:28,049 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:27:28,050 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:27:28,050 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:27:28,051 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:28:17,808 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:28:17,809 - INFO - Gobuster output sample: CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin/             (Status: 403) [Size: 276]
+cgi-bin              (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:28:17,810 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:28:17,812 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:28:17,813 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:28:17,815 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:28:17,815 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:28:17,817 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:28:17,818 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:28:17,818 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:28:17,819 - INFO - Running Nikto scan
+2025-11-09 00:28:17,820 - INFO - Running Nikto scan on http://testphp.vulnweb.com
+2025-11-09 00:28:17,821 - INFO - Executing: nikto -h http://testphp.vulnweb.com -Format json -o /tmp/tmpsnznbnai.json -timeout 300 -ssl
+2025-11-09 00:28:17,913 - WARNING - Failed to parse Nikto JSON output: Expecting value: line 1 column 1 (char 0)
+2025-11-09 00:28:17,913 - INFO - Added 0 Nikto vulnerabilities. Total: 12
+2025-11-09 00:28:17,914 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:28:17,939 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:28:17,940 - INFO - Gobuster output sample: CVS/Entries          (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin/             (Status: 403) [Size: 276]
+cgi-bin              (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:28:17,940 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:28:17,943 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:28:17,952 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:28:17,952 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:28:17,952 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:28:17,952 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:28:17,953 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:28:17,953 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:28:17,954 - INFO - 🔍 WPScan requested, checking if site is WordPress...
+2025-11-09 00:28:17,954 - INFO - 🔍 Checking if http://testphp.vulnweb.com is a WordPress site...
+2025-11-09 00:28:22,371 - INFO - ❌ No WordPress indicators found for http://testphp.vulnweb.com
+2025-11-09 00:28:22,372 - INFO - ❌ Target is not a WordPress site, skipping WPScan
+2025-11-09 00:28:22,372 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:28:36,027 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:28:36,028 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:29:26,875 - INFO - Parsing Gobuster results, length: 651
+2025-11-09 00:29:26,877 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Root             (Status: 200) [Size: 1]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 170]
+images               (Status: 200) [
+2025-11-09 00:29:26,877 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:29:26,878 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:29:26,879 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:29:26,880 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:29:26,880 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:29:26,884 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:29:26,888 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:29:26,891 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:29:26,891 - INFO - Running Nmap scan
+2025-11-09 00:29:57,481 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-09 00:29:57,482 - INFO - Nmap open_ports count: 1
+2025-11-09 00:29:57,483 - INFO - Added 1 Nmap ports. Total: 13
+2025-11-09 00:29:57,484 - INFO - Vulnerability scan completed successfully. Total findings: 13
+2025-11-09 00:33:00,830 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:33:00,831 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:33:00,831 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:33:00,832 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:33:47,735 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:33:47,745 - INFO - Gobuster output sample: CVS/Root             (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin/             (Status: 403) [Size: 276]
+cgi-bin              (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:33:47,746 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:33:47,748 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:33:47,749 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:33:47,749 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:33:47,750 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:33:47,750 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:33:47,750 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:33:47,750 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:33:47,751 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:33:47,927 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:33:47,927 - INFO - Gobuster output sample: CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:33:47,928 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:33:47,928 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:33:47,929 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:33:47,929 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:33:47,930 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:33:47,930 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:33:47,931 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:33:47,932 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:33:47,932 - INFO - Running SQLMap scan
+2025-11-09 00:33:47,933 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com
+2025-11-09 00:33:48,203 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-09 00:33:48,204 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-09 00:33:48,204 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-09 00:33:50,662 - INFO - 📊 SQLMap exit code: 0
+2025-11-09 00:33:50,662 - INFO - 📊 STDOUT length: 1857 chars
+2025-11-09 00:33:50,663 - INFO - 📊 STDERR length: 0 chars
+2025-11-09 00:33:50,663 - INFO - 🚨 SQLMap detected: Injectable Parameter (indicator: 'injectable')
+2025-11-09 00:33:50,664 - INFO - ✅ No vulnerabilities found - all parameters tested
+2025-11-09 00:33:50,664 - INFO - ✅ SQLMap scan completed - No SQL injection vulnerabilities detected
+2025-11-09 00:33:50,664 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:34:14,163 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:34:14,163 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:34:14,164 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:34:14,164 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:35:06,004 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:35:06,005 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Root             (Status: 200) [Size: 1]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin/             (Status: 403) [Size: 276]
+cgi-bin              (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+images               (Status: 200) [Size: 377]
+index.php            (Status: 200) [
+2025-11-09 00:35:06,005 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:35:06,006 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:35:06,006 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:35:06,006 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:35:06,007 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:35:06,007 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:35:06,008 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:35:06,011 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:35:06,011 - INFO - Running Nikto scan
+2025-11-09 00:35:06,011 - INFO - Running Nikto scan on http://testphp.vulnweb.com
+2025-11-09 00:35:06,012 - INFO - Executing: nikto -h http://testphp.vulnweb.com -Format json -o /tmp/tmpya4eusp5.json -timeout 300 -ssl
+2025-11-09 00:35:06,060 - WARNING - Failed to parse Nikto JSON output: Expecting value: line 1 column 1 (char 0)
+2025-11-09 00:35:06,062 - INFO - Added 0 Nikto vulnerabilities. Total: 12
+2025-11-09 00:35:06,063 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:35:07,536 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:35:07,544 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin/             (Status: 403) [Size: 276]
+cgi-bin              (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:35:07,544 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:35:07,545 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:35:07,545 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:35:07,545 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:35:07,546 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:35:07,546 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:35:07,546 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:35:07,547 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:35:07,547 - INFO - 🔍 WPScan requested, checking if site is WordPress...
+2025-11-09 00:35:07,547 - INFO - 🔍 Checking if http://testphp.vulnweb.com is a WordPress site...
+2025-11-09 00:35:11,094 - INFO - ❌ No WordPress indicators found for http://testphp.vulnweb.com
+2025-11-09 00:35:11,094 - INFO - ❌ Target is not a WordPress site, skipping WPScan
+2025-11-09 00:35:11,095 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:35:18,544 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:35:18,544 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:35:18,545 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:35:18,545 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:36:04,165 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:36:04,166 - INFO - Gobuster output sample: CVS/Entries          (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:36:04,166 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:36:04,167 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:36:04,168 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:36:04,169 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:36:04,169 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:36:04,170 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:36:04,170 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:36:04,170 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:36:04,171 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:36:05,631 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:36:05,634 - INFO - Gobuster output sample: CVS/Root             (Status: 200) [Size: 1]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:36:05,635 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:36:05,635 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:36:05,635 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:36:05,636 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:36:05,636 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:36:05,637 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:36:05,637 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:36:05,637 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:36:05,638 - INFO - Running SQLMap scan
+2025-11-09 00:36:05,638 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com
+2025-11-09 00:36:05,920 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-09 00:36:05,920 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-09 00:36:05,921 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-09 00:36:07,928 - INFO - 📊 SQLMap exit code: 0
+2025-11-09 00:36:07,929 - INFO - 📊 STDOUT length: 1861 chars
+2025-11-09 00:36:07,929 - INFO - 📊 STDERR length: 0 chars
+2025-11-09 00:36:07,930 - INFO - 🚨 SQLMap detected: Injectable Parameter (indicator: 'injectable')
+2025-11-09 00:36:07,930 - INFO - ✅ No vulnerabilities found - all parameters tested
+2025-11-09 00:36:07,930 - INFO - ✅ SQLMap scan completed - No SQL injection vulnerabilities detected
+2025-11-09 00:36:07,931 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:36:25,382 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:36:25,383 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:36:25,383 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:36:25,384 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:37:21,843 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:37:21,844 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:37:21,846 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:37:21,848 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:37:21,849 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:37:21,850 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:37:21,850 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:37:21,850 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:37:21,851 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:37:21,851 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:37:21,852 - INFO - Running Nikto scan
+2025-11-09 00:37:21,852 - INFO - Running Nikto scan on http://testphp.vulnweb.com
+2025-11-09 00:37:21,852 - INFO - Executing: nikto -h http://testphp.vulnweb.com -Format json -o /tmp/tmp_fsj2v4u.json -timeout 300 -ssl
+2025-11-09 00:37:21,896 - WARNING - Failed to parse Nikto JSON output: Expecting value: line 1 column 1 (char 0)
+2025-11-09 00:37:21,897 - INFO - Added 0 Nikto vulnerabilities. Total: 12
+2025-11-09 00:37:21,898 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:37:25,567 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:37:25,568 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin/             (Status: 403) [Size: 276]
+cgi-bin              (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:37:25,569 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:37:25,570 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:37:25,576 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:37:25,577 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:37:25,578 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:37:25,578 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:37:25,579 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:37:25,579 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:37:25,579 - INFO - 🔍 WPScan requested, checking if site is WordPress...
+2025-11-09 00:37:25,580 - INFO - 🔍 Checking if http://testphp.vulnweb.com is a WordPress site...
+2025-11-09 00:37:29,329 - INFO - ❌ No WordPress indicators found for http://testphp.vulnweb.com
+2025-11-09 00:37:29,330 - INFO - ❌ Target is not a WordPress site, skipping WPScan
+2025-11-09 00:37:29,331 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:37:53,575 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:37:53,576 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:37:53,576 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:37:53,576 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:38:38,921 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:38:38,925 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin/             (Status: 403) [Size: 276]
+cgi-bin              (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:38:38,930 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:38:38,931 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:38:38,932 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:38:38,933 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:38:38,933 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:38:38,933 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:38:38,934 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:38:38,934 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:38:38,935 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:38:39,325 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:38:39,327 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:38:39,327 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:38:39,328 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:38:39,330 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:38:39,331 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:38:39,331 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:38:39,332 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:38:39,332 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:38:39,333 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:38:39,333 - INFO - Running SQLMap scan
+2025-11-09 00:38:39,333 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com
+2025-11-09 00:38:39,621 - INFO - ✅ SQLMap installed: 1.9.11.2#dev
+2025-11-09 00:38:39,622 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2025-11-09 00:38:39,622 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2025-11-09 00:38:41,772 - INFO - 📊 SQLMap exit code: 0
+2025-11-09 00:38:41,773 - INFO - 📊 STDOUT length: 1812 chars
+2025-11-09 00:38:41,774 - INFO - 📊 STDERR length: 0 chars
+2025-11-09 00:38:41,775 - INFO - 🚨 SQLMap detected: Injectable Parameter (indicator: 'injectable')
+2025-11-09 00:38:41,776 - INFO - ✅ No vulnerabilities found - all parameters tested
+2025-11-09 00:38:41,785 - INFO - ✅ SQLMap scan completed - No SQL injection vulnerabilities detected
+2025-11-09 00:38:41,788 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:39:05,137 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:39:05,138 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:39:05,138 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:39:05,139 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:39:48,939 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:39:48,939 - INFO - Gobuster output sample: CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:39:48,940 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:39:48,941 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:39:48,942 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:39:48,949 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:39:48,950 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:39:48,951 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:39:48,951 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:39:48,951 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:39:48,952 - INFO - 🔍 WPScan requested, checking if site is WordPress...
+2025-11-09 00:39:48,952 - INFO - 🔍 Checking if http://testphp.vulnweb.com is a WordPress site...
+2025-11-09 00:39:49,609 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:39:49,610 - INFO - Gobuster output sample: CVS/Repository       (Status: 200) [Size: 8]
+CVS/Entries          (Status: 200) [Size: 1]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:39:49,611 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:39:49,612 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:39:49,612 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:39:49,613 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:39:49,614 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:39:49,614 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:39:49,614 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:39:49,615 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:39:49,615 - INFO - Running Nikto scan
+2025-11-09 00:39:49,616 - INFO - Running Nikto scan on http://testphp.vulnweb.com
+2025-11-09 00:39:49,617 - INFO - Executing: nikto -h http://testphp.vulnweb.com -Format json -o /tmp/tmpo2xl21rj.json -timeout 300 -ssl
+2025-11-09 00:39:49,668 - WARNING - Failed to parse Nikto JSON output: Expecting value: line 1 column 1 (char 0)
+2025-11-09 00:39:49,669 - INFO - Added 0 Nikto vulnerabilities. Total: 12
+2025-11-09 00:39:49,670 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:39:54,018 - INFO - ❌ No WordPress indicators found for http://testphp.vulnweb.com
+2025-11-09 00:39:54,019 - INFO - ❌ Target is not a WordPress site, skipping WPScan
+2025-11-09 00:39:54,019 - INFO - Vulnerability scan completed successfully. Total findings: 12
+2025-11-09 00:40:15,223 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com
+2025-11-09 00:40:15,224 - INFO - Running Gobuster for http://testphp.vulnweb.com
+2025-11-09 00:41:00,619 - INFO - Parsing Gobuster results, length: 652
+2025-11-09 00:41:00,620 - INFO - Gobuster output sample: CVS/Entries          (Status: 200) [Size: 1]
+CVS/Repository       (Status: 200) [Size: 8]
+CVS/Root             (Status: 200) [Size: 1]
+CVS                  (Status: 200) [Size: 595]
+admin                (Status: 200) [Size: 262]
+cgi-bin              (Status: 403) [Size: 276]
+cgi-bin/             (Status: 403) [Size: 276]
+crossdomain.xml      (Status: 200) [Size: 224]
+favicon.ico          (Status: 200) [Size: 894]
+index.php            (Status: 200) [Size: 4958]
+images               (Status: 200) 
+2025-11-09 00:41:00,620 - INFO - Found 14 matches in Gobuster output
+2025-11-09 00:41:00,621 - INFO - Parsed: /CVS/Entries -> Status 200
+2025-11-09 00:41:00,622 - INFO - Parsed: /CVS/Repository -> Status 200
+2025-11-09 00:41:00,622 - INFO - Parsed: /CVS/Root -> Status 200
+2025-11-09 00:41:00,623 - INFO - Parsed: /CVS -> Status 200
+2025-11-09 00:41:00,624 - INFO - Parsed: /admin -> Status 200
+2025-11-09 00:41:00,624 - INFO - Total parsed: 9 directories, 3 files
+2025-11-09 00:41:00,625 - INFO - Initial total_findings from Gobuster: 12
+2025-11-09 00:41:00,626 - INFO - Running Nmap scan
+2025-11-09 00:41:34,943 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2025-11-09 00:41:34,944 - INFO - Nmap open_ports count: 1
+2025-11-09 00:41:34,944 - INFO - Added 1 Nmap ports. Total: 13
+2025-11-09 00:41:34,945 - INFO - Vulnerability scan completed successfully. Total findings: 13
