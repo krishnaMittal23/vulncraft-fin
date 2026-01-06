@@ -2143,3 +2143,142 @@ xmlrpc.php           (Status: 200) [Size: 7880]
 2026-01-03 17:54:29,268 - INFO - Nmap open_ports count: 1
 2026-01-03 17:54:29,269 - INFO - Added 1 Nmap ports. Total: 10
 2026-01-03 17:54:29,269 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2026-01-06 17:13:50,344 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2026-01-06 17:13:50,354 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2026-01-06 17:14:31,705 - INFO - Parsing Gobuster results, length: 432
+2026-01-06 17:14:31,707 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2026-01-06 17:14:31,708 - INFO - Found 9 matches in Gobuster output
+2026-01-06 17:14:31,711 - INFO - Parsed: /admin.php -> Status 200
+2026-01-06 17:14:31,712 - INFO - Parsed: /index3.php -> Status 200
+2026-01-06 17:14:31,713 - INFO - Parsed: /index2.php -> Status 200
+2026-01-06 17:14:31,714 - INFO - Parsed: /index.php -> Status 200
+2026-01-06 17:14:31,715 - INFO - Parsed: /infos.php -> Status 200
+2026-01-06 17:14:31,717 - INFO - Total parsed: 0 directories, 9 files
+2026-01-06 17:14:31,718 - INFO - Initial total_findings from Gobuster: 9
+2026-01-06 17:14:31,719 - INFO - Vulnerability scan completed successfully. Total findings: 9
+2026-01-06 17:14:45,135 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2026-01-06 17:14:45,136 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2026-01-06 17:15:23,877 - INFO - Parsing Gobuster results, length: 432
+2026-01-06 17:15:23,881 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2026-01-06 17:15:23,886 - INFO - Found 9 matches in Gobuster output
+2026-01-06 17:15:23,891 - INFO - Parsed: /admin.php -> Status 200
+2026-01-06 17:15:23,893 - INFO - Parsed: /index3.php -> Status 200
+2026-01-06 17:15:23,894 - INFO - Parsed: /infos.php -> Status 200
+2026-01-06 17:15:23,896 - INFO - Parsed: /index2.php -> Status 200
+2026-01-06 17:15:23,898 - INFO - Parsed: /index.php -> Status 200
+2026-01-06 17:15:23,899 - INFO - Total parsed: 0 directories, 9 files
+2026-01-06 17:15:23,901 - INFO - Initial total_findings from Gobuster: 9
+2026-01-06 17:15:23,901 - INFO - Running SQLMap scan
+2026-01-06 17:15:23,903 - INFO - 🚀 Starting SQLMap scan on http://testphp.vulnweb.com/listproducts.php?cat=1
+2026-01-06 17:15:25,644 - INFO - ✅ SQLMap installed: 1.9.12.37#dev
+2026-01-06 17:15:25,645 - INFO - 📝 SQLMap command: sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --batch --level=1 --risk=1 --threads=5 --timeout=20 --retries=2 --technique=BEUSTQ --output-dir=/tmp/sqlmap --flush-session --fresh-queries --answers=quit=N,follow=N --random-agent --no-logging
+2026-01-06 17:15:25,646 - INFO - ⏳ Executing SQLMap... (this may take up to 10 minutes)
+2026-01-06 17:16:05,875 - INFO - 📊 SQLMap exit code: 0
+2026-01-06 17:16:05,881 - INFO - 📊 STDOUT length: 5847 chars
+2026-01-06 17:16:05,907 - INFO - 📊 STDERR length: 0 chars
+2026-01-06 17:16:05,932 - INFO - 🚨 SQLMap detected: SQL Injection Vulnerability (indicator: 'is vulnerable')
+2026-01-06 17:16:05,938 - INFO - 🎯 Injection point identified: sqlmap identified the following injection point(s) with a total of 49 HTTP(s) requests:
+2026-01-06 17:16:05,943 - INFO - 🔍 Found parameter: Parameter: cat (GET)
+2026-01-06 17:16:05,960 - INFO - 🔍 Vulnerability title: Title: AND boolean-based blind - WHERE or HAVING clause
+2026-01-06 17:16:05,981 - INFO - 🔍 Payload found: Payload: cat=1 AND 7269=7269...
+2026-01-06 17:16:06,000 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)
+2026-01-06 17:16:06,002 - INFO - 🔍 Payload found: Payload: cat=1 AND GTID_SUBSET(CONCAT(0x7171626b71,(SELECT (ELT(3890=3890,1))),0...
+2026-01-06 17:16:06,024 - INFO - 🔍 Vulnerability title: Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+2026-01-06 17:16:06,033 - INFO - 🔍 Payload found: Payload: cat=1 AND (SELECT 7238 FROM (SELECT(SLEEP(5)))dUqA)...
+2026-01-06 17:16:06,043 - INFO - 🔍 Vulnerability title: Title: Generic UNION query (NULL) - 11 columns
+2026-01-06 17:16:06,051 - INFO - 🔍 Payload found: Payload: cat=1 UNION ALL SELECT NULL,CONCAT(0x7171626b71,0x764b514d724d427852436...
+2026-01-06 17:16:06,068 - INFO - 💾 back-end DBMS: MySQL >= 5.6
+2026-01-06 17:16:06,077 - INFO - ✅ SQLMap scan completed - VULNERABLE! Found 14 details
+2026-01-06 17:16:06,091 - INFO - SQLMap found 1 vulnerable parameters
+2026-01-06 17:16:06,108 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2026-01-06 17:16:26,864 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2026-01-06 17:16:26,865 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2026-01-06 17:17:04,441 - INFO - Parsing Gobuster results, length: 432
+2026-01-06 17:17:04,442 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2026-01-06 17:17:04,443 - INFO - Found 9 matches in Gobuster output
+2026-01-06 17:17:04,444 - INFO - Parsed: /admin.php -> Status 200
+2026-01-06 17:17:04,445 - INFO - Parsed: /index.php -> Status 200
+2026-01-06 17:17:04,445 - INFO - Parsed: /index2.php -> Status 200
+2026-01-06 17:17:04,446 - INFO - Parsed: /index3.php -> Status 200
+2026-01-06 17:17:04,446 - INFO - Parsed: /info.php -> Status 200
+2026-01-06 17:17:04,447 - INFO - Total parsed: 0 directories, 9 files
+2026-01-06 17:17:04,447 - INFO - Initial total_findings from Gobuster: 9
+2026-01-06 17:17:04,448 - INFO - Running Nmap scan
+2026-01-06 17:17:33,915 - INFO - Nmap result type: <class 'dict'>, keys: dict_keys(['open_ports', 'raw_output'])
+2026-01-06 17:17:33,916 - INFO - Nmap open_ports count: 1
+2026-01-06 17:17:33,916 - INFO - Added 1 Nmap ports. Total: 10
+2026-01-06 17:17:33,917 - INFO - Vulnerability scan completed successfully. Total findings: 10
+2026-01-06 17:23:07,648 - ERROR - Failed to fetch monitored repositories: no such table: github_integration_monitoredrepository
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: github_integration_monitoredrepository
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/github_integration/views.py", line 341, in monitored_repositories
+    data = [{
+           ^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 386, in __iter__
+    self._fetch_all()
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/usr/local/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: github_integration_monitoredrepository
+2026-01-06 17:23:07,806 - ERROR - Internal Server Error: /api/github/monitored/
