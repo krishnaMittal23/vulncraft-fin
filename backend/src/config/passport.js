@@ -21,12 +21,16 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: getCallbackURL(),
+      callbackURL: `http://localhost:${process.env.PORT}/api/auth/github/callback`,
+      scope: ['user:email'],
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
         let user = await User.findOne({ githubId: profile.id });
         let firebaseUid = null;
+
+        // Get email from profile or generate a placeholder
+        const email = profile.emails?.[0]?.value || `${profile.username}@github-user.noreply`;
 
         if (!user) {
           // Create new user in MongoDB
@@ -34,7 +38,7 @@ passport.use(
             githubId: profile.id,
             username: profile.username,
             avatar: profile.photos[0]?.value || "",
-            email: profile.emails?.[0]?.value || "",
+            email: email,
             accessToken: accessToken, // Store access token
           });
 
@@ -122,74 +126,11 @@ passport.use(
             }
           }
         } else {
-          // Update access token for existing user
-          user.accessToken = accessToken;
-          
-          // If user doesn't have Firebase UID, create one
-          if (!user.firebaseUid) {
-            try {
-              const firebaseUserRecord = await admin.auth().createUser({
-                uid: `github_${profile.id}`,
-                email: profile.emails?.[0]?.value || undefined,
-                displayName: profile.username,
-                photoURL: profile.photos[0]?.value || undefined,
-              });
-              firebaseUid = firebaseUserRecord.uid;
-
-              // Check if another user already has this firebaseUid
-              const existingUserWithUid = await User.findOne({
-                firebaseUid,
-                _id: { $ne: user._id },
-              });
-
-              if (!existingUserWithUid) {
-                user.firebaseUid = firebaseUid;
-                console.log(
-                  `✅ Firebase user created for existing GitHub user ${profile.username}`
-                );
-              } else {
-                console.warn(
-                  `⚠️  Firebase UID ${firebaseUid} already assigned to another MongoDB user`
-                );
-              }
-            } catch (firebaseError) {
-              if (firebaseError.code === "auth/uid-already-exists") {
-                const existingFirebaseUser = await admin
-                  .auth()
-                  .getUser(`github_${profile.id}`)
-                  .catch(() => null);
-                if (existingFirebaseUser) {
-                  const existingUserWithUid = await User.findOne({
-                    firebaseUid: existingFirebaseUser.uid,
-                    _id: { $ne: user._id },
-                  });
-                  if (!existingUserWithUid) {
-                    user.firebaseUid = existingFirebaseUser.uid;
-                  }
-                }
-              } else if (firebaseError.code === "auth/email-already-exists") {
-                const existingFirebaseUser = await admin
-                  .auth()
-                  .getUserByEmail(profile.emails?.[0]?.value)
-                  .catch(() => null);
-                if (existingFirebaseUser) {
-                  const existingUserWithUid = await User.findOne({
-                    firebaseUid: existingFirebaseUser.uid,
-                    _id: { $ne: user._id },
-                  });
-                  if (!existingUserWithUid) {
-                    user.firebaseUid = existingFirebaseUser.uid;
-                  }
-                }
-              } else {
-                console.error(
-                  "Error creating Firebase user for existing user:",
-                  firebaseError.message
-                );
-              }
-            }
+          // Update user info
+          user.accessToken = accessToken; // Update access token
+          if (profile.emails?.[0]?.value) {
+            user.email = profile.emails[0].value; // Update email if available
           }
-          
           await user.save();
         }
 
