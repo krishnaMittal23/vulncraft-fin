@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Github, Shield, Lock, Bug, Terminal, FileCode, AlertTriangle, Activity, CloudUpload, Layout, Settings, Database } from "lucide-react";
+import { Github, CloudUpload, Layout, Settings, Bug } from "lucide-react";
 import VulnCraftLogo from "../shared/Logo";
 import useAuth from "@/hooks/useAuth";
 
@@ -62,7 +62,7 @@ const RightSection = () => {
           <CardHeader className="pb-4 pt-8 px-8">
             <div className="flex items-center justify-center gap-4 mb-4">
               <div className="p-3 rounded-full bg-white/10 border border-zinc-600/50">
-                <Lock className="h-6 w-6 text-white" />
+                <Github className="h-6 w-6 text-white" />
               </div>
             </div>
             <h3 className="text-xl font-bold text-white text-center mb-2 tracking-wide">
@@ -82,8 +82,6 @@ const RightSection = () => {
               <Github className="h-5 w-5 relative z-10" />
               <span className="relative z-10 tracking-wide text-base">Authenticate with GitHub</span>
             </Button>
-
-
           </CardContent>
         </Card>
 

@@ -1,5 +1,20 @@
 const githubService = require("../services/githubServe");
 const User = require("../models/User");
+const authService = require("../services/authServe");
+
+/**
+ * Get user object for both Passport and Firebase auth
+ */
+const getUserObject = async (req) => {
+  if (req.user && req.user.id) {
+    // Passport authenticated user
+    return await User.findById(req.user.id);
+  } else if (req.firebaseUid) {
+    // Firebase authenticated user
+    return await authService.getUserByFirebaseUid(req.firebaseUid);
+  }
+  return null;
+};
 
 /**
  * Get GitHub repositories of the authenticated user
@@ -7,11 +22,13 @@ const User = require("../models/User");
  */
 exports.getUserRepositories = async (req, res) => {
   try {
-    if (!req.user) {
+    const user = await getUserObject(req);
+
+    if (!user) {
       return res.status(401).json({ message: "Unauthorized" });
     }
 
-    const repos = await githubService.getUserRepos(req.user.id);
+    const repos = await githubService.getUserRepos(user._id);
     res.json(repos);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -26,9 +43,12 @@ exports.fetchRepositoryCode = async (req, res) => {
   const { owner, repo } = req.params;
 
   try {
-    const user = await User.findById(req.user.id);
+    const user = await getUserObject(req);
+
     if (!user || !user.accessToken) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({
+        message: "GitHub not linked. Please connect your GitHub account.",
+      });
     }
 
     const files = await githubService.fetchRepoContents(
@@ -52,9 +72,12 @@ exports.createIssue = async (req, res) => {
   const { title, body, labels } = req.body;
 
   try {
-    const user = await User.findById(req.user.id);
+    const user = await getUserObject(req);
+
     if (!user || !user.accessToken) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({
+        message: "GitHub not linked. Please connect your GitHub account.",
+      });
     }
 
     const issue = await githubService.createGitHubIssue(
@@ -74,3 +97,4 @@ exports.createIssue = async (req, res) => {
     });
   }
 };
+

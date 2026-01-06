@@ -1,6 +1,7 @@
 const passport = require("passport");
 const GitHubStrategy = require("passport-github2").Strategy;
 const User = require("../models/User");
+const admin = require("./firebaseConfig");
 require("dotenv").config();
 
 passport.use(
@@ -25,6 +26,21 @@ passport.use(
         } else {
           user.accessToken = accessToken; // Update access token
           await user.save();
+        }
+
+        // Sync user data to Firebase Realtime Database
+        try {
+          const db = admin.database();
+          await db.ref(`users/${user._id.toString()}`).set({
+            githubId: user.githubId,
+            username: user.username,
+            email: user.email,
+            avatar: user.avatar,
+            lastLogin: new Date().toISOString(),
+          });
+        } catch (firebaseError) {
+          console.error("Error syncing to Firebase:", firebaseError);
+          // Don't fail auth if Firebase sync fails
         }
 
         return done(null, user);

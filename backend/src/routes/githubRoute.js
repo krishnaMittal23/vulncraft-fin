@@ -4,12 +4,13 @@ const {
   fetchRepositoryCode,
   createIssue,
 } = require("../controllers/githubCont");
-const { isAuthenticated } = require("../middlewares/authMiddleware");
+const { isAuthenticatedEither } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
-router.get("/repos", isAuthenticated, getUserRepositories);
-router.get("/repo/:owner/:repo", isAuthenticated, fetchRepositoryCode);
-router.post("/repos/:owner/:repo/issues", isAuthenticated, createIssue);
+router.get("/repos", isAuthenticatedEither, getUserRepositories);
+router.get("/repo/:owner/:repo", isAuthenticatedEither, fetchRepositoryCode);
+router.post("/repos/:owner/:repo/issues", isAuthenticatedEither, createIssue);
 
 module.exports = router;
+
