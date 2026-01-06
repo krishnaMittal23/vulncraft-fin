@@ -61,7 +61,7 @@ const reportSchema = new mongoose.Schema({
     nodeType: String,
     status: String,
     output: Object,
-    detailedAnalysis: Object, // LLM-generated detailed analysis
+    detailedAnalysis: Object, 
     startTime: Date,
     endTime: Date,
     duration: Number,
