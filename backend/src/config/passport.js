@@ -51,12 +51,12 @@ passport.use(
   )
 );
 
-// ✅ Ensure the user ID is properly serialized
+
 passport.serializeUser((user, done) => {
   done(null, user._id.toString()); // Convert ObjectId to string
 });
 
-// ✅ Ensure the user is properly deserialized
+
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
