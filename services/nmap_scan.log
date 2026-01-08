@@ -2282,3 +2282,25 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 django.db.utils.OperationalError: no such table: github_integration_monitoredrepository
 2026-01-06 17:23:07,806 - ERROR - Internal Server Error: /api/github/monitored/
+2026-01-08 16:11:44,735 - INFO - Starting vulnerability scan for http://testphp.vulnweb.com/listproducts.php?cat=1
+2026-01-08 16:11:44,738 - INFO - Running Gobuster for http://testphp.vulnweb.com/listproducts.php?cat=1
+2026-01-08 16:12:48,382 - INFO - Parsing Gobuster results, length: 432
+2026-01-08 16:12:48,385 - INFO - Gobuster output sample: admin.php            (Status: 200) [Size: 7880]
+index3.php           (Status: 200) [Size: 7880]
+index.php            (Status: 200) [Size: 7880]
+index2.php           (Status: 200) [Size: 7880]
+info.php             (Status: 200) [Size: 7880]
+infos.php            (Status: 200) [Size: 7880]
+phpinfos.php         (Status: 200) [Size: 7880]
+phpinfo.php          (Status: 200) [Size: 7880]
+xmlrpc.php           (Status: 200) [Size: 7880]
+
+2026-01-08 16:12:48,386 - INFO - Found 9 matches in Gobuster output
+2026-01-08 16:12:48,387 - INFO - Parsed: /admin.php -> Status 200
+2026-01-08 16:12:48,389 - INFO - Parsed: /index3.php -> Status 200
+2026-01-08 16:12:48,391 - INFO - Parsed: /index.php -> Status 200
+2026-01-08 16:12:48,392 - INFO - Parsed: /index2.php -> Status 200
+2026-01-08 16:12:48,393 - INFO - Parsed: /info.php -> Status 200
+2026-01-08 16:12:48,393 - INFO - Total parsed: 0 directories, 9 files
+2026-01-08 16:12:48,395 - INFO - Initial total_findings from Gobuster: 9
+2026-01-08 16:12:48,395 - INFO - Vulnerability scan completed successfully. Total findings: 9

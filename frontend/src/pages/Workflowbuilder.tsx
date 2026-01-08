@@ -111,6 +111,7 @@ const WorkflowBuilderContent = () => {
   const [prompt, setPrompt] = useState("");
   const [isPromptLoading, setIsPromptLoading] = useState(false);
   const [promptError, setPromptError] = useState<string | null>(null);
+  const [isPromptPanelCollapsed, setIsPromptPanelCollapsed] = useState(false);
 
   // Workflow execution progress tracking
   const { progress, joinWorkflow, clearProgress } = useWorkflowSocket();
@@ -897,26 +898,50 @@ const WorkflowBuilderContent = () => {
   return (
     <>
       {/* AI Agent Prompt - Always visible at top */}
-      <form onSubmit={handlePromptSubmit} className="w-full flex flex-col gap-2 p-4 bg-background/95 backdrop-blur-sm border-b sticky top-0 z-50 shadow-sm">
-        <label htmlFor="workflow-prompt" className="font-semibold text-sm flex items-center gap-2">
-          <span className="text-xl">🤖</span>
-          AI Security Workflow Agent
-        </label>
-        <Textarea
-          id="workflow-prompt"
-          value={prompt}
-          onChange={e => setPrompt(e.target.value)}
-          placeholder="e.g., 'scan http://testphp.vulnweb.com for owasp and send gmail' or 'full web security scan before deployment'"
-          className="resize-none min-h-[60px] text-sm"
-          disabled={isPromptLoading}
-        />
-        <div className="flex items-center gap-2">
-          <Button type="submit" disabled={isPromptLoading || !prompt.trim()} className="gap-2" size="sm">
-            {isPromptLoading ? <span className="animate-spin">⏳</span> : <span>🚀</span>}
-            {isPromptLoading ? "Generating..." : "Generate & Execute Workflow"}
-          </Button>
-          {promptError && <span className="text-destructive text-xs">{promptError}</span>}
+      <form onSubmit={handlePromptSubmit} className="w-full flex flex-col gap-2 bg-background/95 backdrop-blur-sm border-b sticky top-0 z-50 shadow-sm">
+        <div className="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-accent/50 transition-colors" onClick={() => setIsPromptPanelCollapsed(!isPromptPanelCollapsed)}>
+          <label htmlFor="workflow-prompt" className="font-semibold text-sm flex items-center gap-2 cursor-pointer">
+            <span className="text-xl">🤖</span>
+            AI Security Workflow Agent
+          </label>
+          <button
+            type="button"
+            className="p-1 hover:bg-accent rounded transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsPromptPanelCollapsed(!isPromptPanelCollapsed);
+            }}
+          >
+            {isPromptPanelCollapsed ? (
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            ) : (
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+              </svg>
+            )}
+          </button>
         </div>
+        {!isPromptPanelCollapsed && (
+          <div className="px-4 pb-4 space-y-2">
+            <Textarea
+              id="workflow-prompt"
+              value={prompt}
+              onChange={e => setPrompt(e.target.value)}
+              placeholder="e.g., 'scan http://testphp.vulnweb.com for owasp and send gmail' or 'full web security scan before deployment'"
+              className="resize-none min-h-[60px] text-sm"
+              disabled={isPromptLoading}
+            />
+            <div className="flex items-center gap-2">
+              <Button type="submit" disabled={isPromptLoading || !prompt.trim()} className="gap-2" size="sm">
+                {isPromptLoading ? <span className="animate-spin">⏳</span> : <span>🚀</span>}
+                {isPromptLoading ? "Generating..." : "Generate & Execute Workflow"}
+              </Button>
+              {promptError && <span className="text-destructive text-xs">{promptError}</span>}
+            </div>
+          </div>
+        )}
       </form>
 
       <div ref={reactFlowWrapper} className="h-full w-full">
