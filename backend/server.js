@@ -11,6 +11,28 @@ const io = new Server(server, {
   },
 });
 
+// Socket.IO connection handling
+io.on("connection", (socket) => {
+  console.log(`📡 Client connected: ${socket.id}`);
+
+  socket.on("join-workflow", (workflowId) => {
+    socket.join(`workflow-${workflowId}`);
+    console.log(`📡 Socket ${socket.id} joined workflow-${workflowId}`);
+  });
+
+  socket.on("leave-workflow", (workflowId) => {
+    socket.leave(`workflow-${workflowId}`);
+    console.log(`📡 Socket ${socket.id} left workflow-${workflowId}`);
+  });
+
+  socket.on("disconnect", () => {
+    console.log(`📡 Client disconnected: ${socket.id}`);
+  });
+});
+
+// Make io available to other modules
+app.set('io', io);
+
 // TODO: Add Logger
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

@@ -12,12 +12,27 @@ const DJANGO_BACKEND_URL = process.env.DJANGO_BACKEND_URL || "http://localhost:8
  * Execute a workflow
  * @param {string} workflowId - Workflow ID
  * @param {string} userId - User ID
+ * @param {Object} io - Socket.IO instance
  * @returns {Promise<Object>} - Execution report
  */
-async function executeWorkflow(workflowId, userId) {
+async function executeWorkflow(workflowId, userId, io = null) {
   console.log(`\n========== WORKFLOW EXECUTION START ==========`);
   console.log(`Workflow ID: ${workflowId}`);
   console.log(`User ID: ${userId}`);
+
+  // Emit log helper
+  const emitLog = (level, message, nodeType = null) => {
+    if (io) {
+      io.to(`workflow-${workflowId}`).emit('execution-log', {
+        timestamp: new Date(),
+        level,
+        message,
+        nodeType,
+        source: 'backend',
+      });
+    }
+    console.log(`[${level.toUpperCase()}] ${message}`);
+  };
 
   try {
     // Fetch workflow
@@ -26,8 +41,8 @@ async function executeWorkflow(workflowId, userId) {
       throw new Error("Workflow not found");
     }
 
-    console.log(`📋 Workflow: ${workflow.name}`);
-    console.log(`📦 Nodes: ${workflow.nodes.length}, Edges: ${workflow.edges.length}`);
+    emitLog('info', `📋 Workflow: ${workflow.name}`);
+    emitLog('info', `📦 Nodes: ${workflow.nodes.length}, Edges: ${workflow.edges.length}`);
 
     // Find trigger node
     const triggerNode = workflow.nodes.find(node => node.type === "trigger");
@@ -42,7 +57,7 @@ async function executeWorkflow(workflowId, userId) {
       throw new Error("No target URL specified in trigger node");
     }
 
-    console.log(`🎯 Target: ${targetUrl}`);
+    emitLog('info', `🎯 Target: ${targetUrl}`);
 
     // Create report
     const report = new Report({
@@ -55,10 +70,20 @@ async function executeWorkflow(workflowId, userId) {
     });
     await report.save();
 
-    console.log(`📄 Report created: ${report._id}`);
+    emitLog('info', `📄 Report created: ${report._id}`);
+
+    // Emit workflow started event
+    if (io) {
+      io.to(`workflow-${workflowId}`).emit('workflow-started', {
+        workflowId,
+        reportId: report._id,
+        totalNodes: workflow.nodes.length,
+        executionMode: 'parallel', // TODO: detect from workflow structure
+      });
+    }
 
     // Execute nodes in order
-    const executionResults = await executeNodes(workflow.nodes, workflow.edges, targetUrl, report);
+    const executionResults = await executeNodes(workflow.nodes, workflow.edges, targetUrl, report, io, workflowId, emitLog);
 
     // Calculate findings
     const findings = calculateFindings(executionResults);
@@ -74,15 +99,26 @@ async function executeWorkflow(workflowId, userId) {
     
     await report.save();
 
-    console.log(`✅ Workflow execution completed`);
-    console.log(`⏱️  Duration: ${report.duration}ms`);
-    console.log(`🔍 Total findings: ${findings.total}`);
+    emitLog('info', `✅ Workflow execution completed`);
+    emitLog('info', `⏱️  Duration: ${report.duration}ms`);
+    emitLog('info', `🔍 Total findings: ${findings.total}`);
+
+    // Emit workflow completed event
+    if (io) {
+      io.to(`workflow-${workflowId}`).emit('workflow-completed', {
+        workflowId,
+        reportId: report._id,
+        duration: report.duration,
+        findings,
+      });
+    }
+
     console.log(`==========================================\n`);
 
     return report;
 
   } catch (error) {
-    console.error(`❌ Workflow execution failed:`, error.message);
+    emitLog('error', `❌ Workflow execution failed: ${error.message}`);
     
     // Try to update report if it exists
     try {
@@ -100,6 +136,14 @@ async function executeWorkflow(workflowId, userId) {
       console.error("Failed to update report:", updateError);
     }
 
+    // Emit workflow failed event
+    if (io) {
+      io.to(`workflow-${workflowId}`).emit('workflow-failed', {
+        workflowId,
+        error: error.message,
+      });
+    }
+
     throw error;
   }
 }
@@ -107,7 +151,7 @@ async function executeWorkflow(workflowId, userId) {
 /**
  * Execute workflow nodes
  */
-async function executeNodes(nodes, edges, targetUrl, report) {
+async function executeNodes(nodes, edges, targetUrl, report, io = null, workflowId = null, emitLog = () => {}) {
   const results = {
     nodeResults: [],
     errors: [],
@@ -116,14 +160,23 @@ async function executeNodes(nodes, edges, targetUrl, report) {
 
   // Build execution order based on edges
   const executionOrder = buildExecutionOrder(nodes, edges);
-  console.log(`🔄 Execution order:`, executionOrder.map(n => n.type));
+  emitLog('info', `🔄 Execution order: ${executionOrder.map(n => n.type).join(' -> ')}`);
 
   for (const node of executionOrder) {
     // Skip trigger node
     if (node.type === "trigger") continue;
 
     const startTime = new Date();
-    console.log(`\n🔧 Executing node: ${node.type} (${node.id})`);
+    emitLog('info', `🔧 Executing node: ${node.type} (${node.id})`, node.type);
+
+    // Emit node started event
+    if (io && workflowId) {
+      io.to(`workflow-${workflowId}`).emit('node-started', {
+        nodeId: node.id,
+        nodeType: node.type,
+        executionLevel: 1,
+      });
+    }
 
     try {
       let output = null;
@@ -131,22 +184,22 @@ async function executeNodes(nodes, edges, targetUrl, report) {
       // Execute based on node type
       switch (node.type) {
         case "gobuster":
-          output = await runGobuster(targetUrl);
+          output = await runGobuster(targetUrl, emitLog);
           break;
         case "nmap":
-          output = await runNmap(targetUrl);
+          output = await runNmap(targetUrl, emitLog);
           break;
         case "sqlmap":
-          output = await runSQLMap(targetUrl, node.data);
+          output = await runSQLMap(targetUrl, node.data, emitLog);
           break;
         case "wpscan":
-          output = await runWPScan(targetUrl);
+          output = await runWPScan(targetUrl, emitLog);
           break;
         case "nikto":
-          output = await runNikto(targetUrl);
+          output = await runNikto(targetUrl, emitLog);
           break;
         case "owasp-vulnerabilities":
-          output = await runOWASPCheck(targetUrl);
+          output = await runOWASPCheck(targetUrl, emitLog);
           break;
         case "owasp-zap":
           output = await runOWASPZap(targetUrl, node.data);
@@ -177,7 +230,16 @@ async function executeNodes(nodes, edges, targetUrl, report) {
       const endTime = new Date();
       const duration = endTime - startTime;
 
-      console.log(`✅ Node completed in ${duration}ms`);
+      emitLog('info', `✅ Node completed in ${duration}ms`, node.type);
+
+      // Emit node completed event
+      if (io && workflowId) {
+        io.to(`workflow-${workflowId}`).emit('node-completed', {
+          nodeId: node.id,
+          nodeType: node.type,
+          duration,
+        });
+      }
 
       // Generate detailed report for security scan nodes
       let detailedAnalysis = null;
@@ -185,11 +247,11 @@ async function executeNodes(nodes, edges, targetUrl, report) {
       
       if (securityNodes.includes(node.type) && output) {
         try {
-          console.log(`📊 Generating detailed analysis for ${node.type}...`);
+          emitLog('info', `📊 Generating detailed analysis for ${node.type}...`, node.type);
           detailedAnalysis = await generateDetailedNodeReport(node.type, output);
-          console.log(`✅ Detailed analysis generated for ${node.type}`);
+          emitLog('info', `✅ Detailed analysis generated for ${node.type}`, node.type);
         } catch (analysisError) {
-          console.error(`⚠️ Failed to generate detailed analysis: ${analysisError.message}`);
+          emitLog('warning', `⚠️ Failed to generate detailed analysis: ${analysisError.message}`, node.type);
           detailedAnalysis = {
             summary: "Detailed analysis generation failed",
             error: analysisError.message
@@ -215,7 +277,17 @@ async function executeNodes(nodes, edges, targetUrl, report) {
 
     } catch (error) {
       const endTime = new Date();
-      console.error(`❌ Node failed:`, error.message);
+      emitLog('error', `❌ Node failed: ${error.message}`, node.type);
+
+      // Emit node failed event
+      if (io && workflowId) {
+        io.to(`workflow-${workflowId}`).emit('node-failed', {
+          nodeId: node.id,
+          nodeType: node.type,
+          error: error.message,
+          duration: endTime - startTime,
+        });
+      }
 
       results.nodeResults.push({
         nodeId: node.id,

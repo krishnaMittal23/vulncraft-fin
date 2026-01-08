@@ -131,8 +131,11 @@ exports.executeWorkflow = async (req, res) => {
 
     console.log(`\n🚀 Starting workflow execution: ${id}`);
 
-    // Execute workflow asynchronously
-    executeWorkflow(id, userId)
+    // Get io instance from app
+    const io = req.app.get('io');
+
+    // Execute workflow asynchronously with io context
+    executeWorkflow(id, userId, io)
       .then(report => {
         console.log(`✅ Workflow ${id} completed successfully`);
       })

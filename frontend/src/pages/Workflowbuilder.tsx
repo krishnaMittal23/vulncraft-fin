@@ -57,6 +57,9 @@ import { v4 as uuidv4 } from "uuid";
 import "reactflow/dist/style.css";
 import useAuth from "@/hooks/useAuth";
 import { Textarea } from "@/components/ui/textarea";
+import { WorkflowProgressViewer } from "@/components/shared/WorkflowProgressViewer";
+import { useWorkflowSocket } from "@/hooks/useWorkflowSocket";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 const nodeTypes: NodeTypes = {
   trigger: TriggerNode,
@@ -109,8 +112,19 @@ const WorkflowBuilderContent = () => {
   const [isPromptLoading, setIsPromptLoading] = useState(false);
   const [promptError, setPromptError] = useState<string | null>(null);
 
+  // Workflow execution progress tracking
+  const { progress, joinWorkflow, clearProgress } = useWorkflowSocket();
+  const [showExecutionPanel, setShowExecutionPanel] = useState(false);
+
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
   const reactFlowInstance = useReactFlow();
+
+  // Auto-open execution panel when workflow starts
+  useEffect(() => {
+    if (progress && progress.status !== 'idle') {
+      setShowExecutionPanel(true);
+    }
+  }, [progress]);
 
   useEffect(() => {
     const loadWorkflow = async () => {
@@ -170,6 +184,17 @@ const WorkflowBuilderContent = () => {
 
     loadWorkflow();
   }, []);
+
+  // Join workflow room for real-time updates
+  useEffect(() => {
+    if (workflow && (workflow._id || workflow.id)) {
+      const workflowId = workflow._id || workflow.id;
+      joinWorkflow(workflowId);
+      return () => {
+        clearProgress();
+      };
+    }
+  }, [workflow, joinWorkflow, clearProgress]);
 
   // AI Agent: Handle prompt submission
   const handlePromptSubmit = async (e: React.FormEvent) => {
@@ -1067,7 +1092,27 @@ const WorkflowBuilderContent = () => {
             </div>
           )}
         </ReactFlow>
+
+        {/* Execution Progress & Logs - Removed from here */}
       </div>
+
+      {/* Execution Panel - Side Sheet */}
+      <Sheet open={showExecutionPanel} onOpenChange={setShowExecutionPanel}>
+        <SheetContent side="right" className="w-[600px] sm:w-[700px] overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle>Workflow Execution Progress</SheetTitle>
+          </SheetHeader>
+          <div className="mt-4">
+            {progress && progress.status !== 'idle' ? (
+              <WorkflowProgressViewer progress={progress} />
+            ) : (
+              <div className="text-center text-muted-foreground py-8">
+                No active execution. Start a workflow to see progress here.
+              </div>
+            )}
+          </div>
+        </SheetContent>
+      </Sheet>
 
       <NodeConfigDialog
         open={showConfigDialog}
