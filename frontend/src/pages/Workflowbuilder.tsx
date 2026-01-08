@@ -56,6 +56,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import "reactflow/dist/style.css";
 import useAuth from "@/hooks/useAuth";
+import { Textarea } from "@/components/ui/textarea";
 
 const nodeTypes: NodeTypes = {
   trigger: TriggerNode,
@@ -102,6 +103,11 @@ const WorkflowBuilderContent = () => {
   const [showConfigDialog, setShowConfigDialog] = useState(false);
   const [showOWASPConfigDialog, setShowOWASPConfigDialog] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  // AI Agent prompt state
+  const [prompt, setPrompt] = useState("");
+  const [isPromptLoading, setIsPromptLoading] = useState(false);
+  const [promptError, setPromptError] = useState<string | null>(null);
 
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
   const reactFlowInstance = useReactFlow();
@@ -164,6 +170,120 @@ const WorkflowBuilderContent = () => {
 
     loadWorkflow();
   }, []);
+
+  // AI Agent: Handle prompt submission
+  const handlePromptSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!prompt.trim()) return;
+    
+    setPromptError(null);
+    setIsPromptLoading(true);
+    
+    try {
+      // Audit: Log prompt submission
+      console.log(`[AUDIT] User '${user?.username || 'unknown'}' submitted prompt:`, prompt);
+
+      // Call AI agent backend
+      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:3000"}/api/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: prompt }),
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error("AI agent backend error");
+      }
+
+      const data = await response.json();
+      if (!data.success || !data.message) {
+        throw new Error(data.error || "No valid response from AI agent");
+      }
+
+      // Parse workflow JSON
+      let llmResult;
+      try {
+        llmResult = typeof data.message === 'string' ? JSON.parse(data.message) : data.message;
+      } catch (e) {
+        throw new Error("AI agent response is not valid JSON");
+      }
+
+      if (!llmResult.nodes || !llmResult.edges) {
+        throw new Error("AI agent did not return valid workflow structure");
+      }
+
+      // Security: Block internal/localhost targets
+      const triggerNode = llmResult.nodes.find((n: any) => n.type === 'trigger');
+      const url = triggerNode?.data?.sourceUrl || triggerNode?.data?.url;
+      if (url && /^(https?:\/\/(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2[0-9]|3[01])))/.test(url)) {
+        console.warn(`[AUDIT] Blocked internal/localhost target: ${url}`);
+        throw new Error("Internal or localhost targets are not allowed");
+      }
+
+      // Update React Flow state
+      setNodes(llmResult.nodes);
+      setEdges(llmResult.edges);
+
+      // Save workflow
+      let newWorkflow = workflow;
+      if (!workflow) {
+        // Create new workflow
+        newWorkflow = {
+          id: '',
+          name: llmResult.name || `AI Workflow ${new Date().toLocaleString()}`,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          nodes: llmResult.nodes,
+          edges: llmResult.edges,
+        };
+        const created = await useWorkflowStore.getState().addWorkflow(newWorkflow);
+        setWorkflow(created);
+        newWorkflow = created;
+        console.log(`[AUDIT] Workflow created:`, created);
+      } else {
+        // Update existing workflow
+        const updated = {
+          ...workflow,
+          nodes: llmResult.nodes,
+          edges: llmResult.edges,
+          updatedAt: new Date().toISOString(),
+        };
+        await useWorkflowStore.getState().updateWorkflow(updated, user?.username);
+        setWorkflow(updated);
+        newWorkflow = updated;
+        console.log(`[AUDIT] Workflow updated:`, updated);
+      }
+
+      // Trigger execution
+      if (newWorkflow && (newWorkflow._id || newWorkflow.id)) {
+        const workflowId = newWorkflow._id || newWorkflow.id;
+        const execRes = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/workflows/${workflowId}/execute`, {
+          method: "POST",
+          credentials: 'include',
+        });
+        
+        if (!execRes.ok) {
+          console.error(`[AUDIT] Workflow execution failed for ${workflowId}`);
+          throw new Error("Failed to start workflow execution");
+        }
+        
+        const execData = await execRes.json();
+        toast.success("Workflow execution started", {
+          description: execData.message || "AI-generated workflow is running.",
+        });
+        console.log(`[AUDIT] Workflow execution started for ${workflowId}`);
+      }
+
+      // Reset prompt
+      setPrompt("");
+      
+    } catch (err: any) {
+      setPromptError(err.message || "Failed to contact AI agent");
+      console.error(`[AUDIT] Error in prompt workflow:`, err);
+    } finally {
+      setIsPromptLoading(false);
+    }
+  };
 
   const addTriggerNode = useCallback(() => {
     const newNode: WorkflowNodeType = {
@@ -751,6 +871,29 @@ const WorkflowBuilderContent = () => {
 
   return (
     <>
+      {/* AI Agent Prompt - Always visible at top */}
+      <form onSubmit={handlePromptSubmit} className="w-full flex flex-col gap-2 p-4 bg-background/95 backdrop-blur-sm border-b sticky top-0 z-50 shadow-sm">
+        <label htmlFor="workflow-prompt" className="font-semibold text-sm flex items-center gap-2">
+          <span className="text-xl">🤖</span>
+          AI Security Workflow Agent
+        </label>
+        <Textarea
+          id="workflow-prompt"
+          value={prompt}
+          onChange={e => setPrompt(e.target.value)}
+          placeholder="e.g., 'scan http://testphp.vulnweb.com for owasp and send gmail' or 'full web security scan before deployment'"
+          className="resize-none min-h-[60px] text-sm"
+          disabled={isPromptLoading}
+        />
+        <div className="flex items-center gap-2">
+          <Button type="submit" disabled={isPromptLoading || !prompt.trim()} className="gap-2" size="sm">
+            {isPromptLoading ? <span className="animate-spin">⏳</span> : <span>🚀</span>}
+            {isPromptLoading ? "Generating..." : "Generate & Execute Workflow"}
+          </Button>
+          {promptError && <span className="text-destructive text-xs">{promptError}</span>}
+        </div>
+      </form>
+
       <div ref={reactFlowWrapper} className="h-full w-full">
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-70 z-50">
