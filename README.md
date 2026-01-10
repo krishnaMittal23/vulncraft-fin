@@ -1,4 +1,4 @@
-# 🛡️ VulnCraft V2 - Automated Vulnerability Scanning in GitHub CI/CD Pipelines
+# 🛡️ VulnCraft - Automated Vulnerability Scanning in GitHub CI/CD Pipelines
 
 <div align="center">
 
