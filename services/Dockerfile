@@ -36,4 +36,7 @@ RUN if [ ! -f /usr/share/wordlists/dirb/common.txt ]; then \
     wget -q https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/common.txt -O /usr/share/wordlists/dirb/common.txt; \
     fi
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Make entrypoint executable
+RUN chmod +x entrypoint.sh
+
+CMD ["./entrypoint.sh"]

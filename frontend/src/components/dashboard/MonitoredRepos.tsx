@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { GitBranch, Plus, Trash2, AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 
-const DJANGO_SERVICES_URL = "http://localhost:8000";
+const DJANGO_SERVICES_URL = import.meta.env.VITE_DJANGO_SERVICES_URL || "http://localhost:8000";
 
 interface MonitoredRepo {
   id: number;
