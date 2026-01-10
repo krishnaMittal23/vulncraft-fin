@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { toast } from 'sonner';
 
-const DJANGO_SERVICES_URL = "http://localhost:8000";
+const DJANGO_SERVICES_URL = import.meta.env.VITE_DJANGO_SERVICES_URL || "http://localhost:8000";
 
 export interface MonitoredRepo {
   id: number;

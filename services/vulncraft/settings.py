@@ -24,14 +24,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-cny$7l0ukv)8maz8ca@st%yg++dn5c*de2!7xvnftrl6v0+rm('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "True"
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "trite-nevada-nonconcordantly.ngrok-free.dev",
     ".ngrok-free.app",  # Allow any ngrok subdomain
     ".ngrok.io",  # Allow any ngrok subdomain
+    ".railway.app",  # Allow any Railway subdomain
+    ".up.railway.app",  # Allow Railway production URLs
+]
+
+# Add any custom allowed host from environment
+if os.environ.get('RAILWAY_PUBLIC_DOMAIN'):
+    ALLOWED_HOSTS.append(os.environ.get('RAILWAY_PUBLIC_DOMAIN'))
+
+# For Railway, trust the proxy headers
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.railway.app",
+    "https://*.up.railway.app",
+    "http://localhost:5173",
+    "http://localhost:5174",
 ]
 
 # Application definition
@@ -139,6 +152,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
     "http://127.0.0.1:5174",
 ]
+
+# Add frontend production URL from environment
+if os.environ.get('FRONTEND_URL'):
+    CORS_ALLOWED_ORIGINS.append(os.environ.get('FRONTEND_URL'))
 
 CORS_ALLOW_CREDENTIALS = True
 
