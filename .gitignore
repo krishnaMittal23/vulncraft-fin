@@ -1,0 +1,13 @@
+# Secrets / env (do not commit)
+/frontend/.env
+/backend/.env
+/services/.env
+/services/*.pem
+*.pem
+
+# Local scratch
+/tempu.txt
+/TODO.txt
+
+# OS / editor
+.DS_Store

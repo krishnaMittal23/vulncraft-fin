@@ -1,0 +1,23 @@
+{
+  "name": "VulnCraft DevSecOps Console",
+  "short_name": "VulnCraft",
+  "description": "AI-powered DevSecOps platform for automated security testing and vulnerability management.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090B",
+  "theme_color": "#22C55E",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
