@@ -1,2 +1,15 @@
 requests
 PyGithub
+
+redis (pub sub)
+authentication
+JWT
+handshake phase
+socket.io
+BullMQ
+spread operator ( ... )
+doubt -> why res.redirect in backend for frontend?
+JS array operations
+all functions summary of workflowExecutionService.JS
+AsyncLocalStorage +
+ORM
